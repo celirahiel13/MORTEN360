@@ -1,0 +1,653 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>MORTEN360</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap">
+<style>
+:root{--bg:#000;--fg:#fff;--muted:#a3a3a3;--faint:#8a8a8a;--rule:#262626;--line:#3a3a3a;--panel:#111;--panel2:#1a1a1a;--g:#32d74b;--a:#ff9f0a;--r:#ff453a;--b:#6cb2ff;--n:#8a8a8a;color-scheme:dark}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#000;--fg:#fff;--muted:#a3a3a3;--faint:#8a8a8a;--rule:#262626;--line:#3a3a3a;--panel:#111;--panel2:#1a1a1a;--g:#32d74b;--a:#ff9f0a;--r:#ff453a;--b:#6cb2ff;--n:#8a8a8a;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#000;--fg:#fff;--muted:#a3a3a3;--faint:#8a8a8a;--rule:#262626;--line:#3a3a3a;--panel:#111;--panel2:#1a1a1a;--g:#32d74b;--a:#ff9f0a;--r:#ff453a;--b:#6cb2ff;--n:#8a8a8a;color-scheme:dark}
+:root[data-theme="light"]{--bg:#fff;--fg:#000;--muted:#525252;--faint:#6b6b6b;--rule:#e5e5e5;--line:#c4c4c4;--panel:#f4f4f4;--panel2:#ececec;--g:#15803d;--a:#b45309;--r:#dc2626;--b:#1d4ed8;--n:#6b6b6b;color-scheme:light}
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*,*::before,*::after{box-sizing:inherit}
+html{background:var(--bg);scroll-padding-top:calc(env(safe-area-inset-top,0px) + 80px)}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:'Archivo','Helvetica Neue',Helvetica,sans-serif;font-size:15px;line-height:1.45;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button,input,select{font:inherit;color:inherit}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
+svg{flex-shrink:0}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.wm{font-stretch:125%;font-size:20px;line-height:1;text-transform:uppercase;display:inline-flex;align-items:center;min-height:44px}
+.wm b{font-weight:900}.wm span{font-weight:400}
+.disp{font-stretch:125%;font-weight:900;text-transform:uppercase;line-height:.95}
+.muted{color:var(--muted)}.small{font-size:13px}.tiny{font-size:12px}
+.g{--c:var(--g)}.a{--c:var(--a)}.r{--c:var(--r)}.b{--c:var(--b)}.n{--c:var(--n)}
+.st{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:var(--c);white-space:nowrap}
+.bar{height:6px;border-radius:3px;background:var(--rule);overflow:hidden}.bar i{display:block;height:100%;background:var(--c);border-radius:3px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 18px;border-radius:6px;border:1px solid var(--fg);background:var(--fg);color:var(--bg);font-weight:700;font-size:14px;cursor:pointer;text-align:center}
+.btn.ghost{background:transparent;color:var(--fg);border-color:var(--line)}
+.btn.ghost:hover{border-color:var(--fg)}
+.btn.full{display:flex;width:100%}
+.btn.sm{min-height:36px;padding:0 12px;font-size:13px}
+.lnk{display:inline-flex;align-items:center;gap:6px;min-height:44px;font-size:14px;font-weight:700}
+.lnk:hover{text-decoration:underline;text-underline-offset:3px}
+.chip{display:inline-flex;align-items:center;min-height:36px;padding:0 14px;border-radius:18px;border:1px solid var(--line);background:transparent;font-size:13px;font-weight:600;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.seg{display:inline-flex;padding:3px;border:1px solid var(--line);border-radius:6px;gap:2px}
+.seg>*{display:inline-flex;align-items:center;justify-content:center;min-height:36px;padding:0 12px;border-radius:4px;border:none;background:transparent;font-size:13px;font-weight:600;color:var(--muted);cursor:pointer}
+.seg>[aria-current="page"],.seg>[aria-pressed="true"]{background:var(--fg);color:var(--bg);font-weight:700}
+.h1{margin:0;font-stretch:125%;font-weight:900;text-transform:uppercase;line-height:.95;font-size:clamp(32px,5vw,44px)}
+.h2{margin:0;font-stretch:110%;font-weight:800;font-size:20px}
+.h3{margin:0;font-weight:700;font-size:16px}
+.lede{margin:8px 0 0;color:var(--muted);font-size:15px;max-width:70ch}
+.sec{display:flex;flex-direction:column;gap:14px}
+.row-h{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.stack{display:flex;flex-direction:column;gap:36px}
+.list{border-top:1px solid var(--rule)}
+.item{display:flex;gap:14px;align-items:center;padding:14px 0;border-bottom:1px solid var(--rule)}
+a.item:hover .t,a.card:hover .city,a.trow:hover .t{text-decoration:underline;text-underline-offset:3px}
+.item .grow{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
+.item .t{font-weight:600;font-size:15px}
+.item .s{font-size:13px;color:var(--muted)}
+.item .end{display:flex;flex-direction:column;align-items:flex-end;gap:3px;text-align:right;font-size:13px;font-weight:600;white-space:nowrap}
+.panel{border:1px solid var(--line);border-radius:8px;padding:clamp(16px,2.5vw,24px)}
+.chev{color:var(--faint)}
+.empty{margin:0;padding:16px 0;color:var(--muted);border-bottom:1px solid var(--rule)}
+.back{display:inline-flex;align-items:center;gap:4px;min-height:44px;margin:0 0 8px -6px;font-size:14px;font-weight:600;color:var(--muted)}
+.back:hover{color:var(--fg)}
+.kv{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:18px 24px}
+.kv div{display:flex;flex-direction:column;gap:3px}.kv .k{font-size:12px;color:var(--muted)}.kv .v{font-size:15px;font-weight:600}
+select.sel{min-height:36px;padding:0 10px;border-radius:6px;border:1px solid var(--line);background:var(--bg);font-size:13px;font-weight:600;cursor:pointer;max-width:100%}
+input.in,select.in{width:100%;min-height:44px;padding:0 12px;border-radius:6px;border:1px solid var(--line);background:var(--bg);font-size:15px}
+label.fld{display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;color:var(--muted)}
+#toast{position:fixed;left:50%;bottom:calc(92px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:50;max-width:min(92vw,460px);padding:12px 16px;border-radius:8px;background:var(--fg);color:var(--bg);font-size:14px;font-weight:600;box-shadow:0 8px 30px rgba(0,0,0,.5);opacity:0;pointer-events:none;transition:opacity .2s}
+#toast.on{opacity:1}
+@media (prefers-reduced-motion: reduce){#toast{transition:none}}
+
+/* ---------- Operations shell ---------- */
+.ops{display:flex;min-height:100vh}
+.side{width:248px;flex-shrink:0;position:sticky;top:0;height:100vh;overflow-y:auto;border-right:1px solid var(--rule);padding:calc(20px + env(safe-area-inset-top,0px)) 14px 20px;display:flex;flex-direction:column;gap:22px}
+.side .wm{padding:0 8px}
+.snav{display:flex;flex-direction:column;gap:2px}
+.snav a{display:flex;align-items:center;gap:12px;min-height:40px;padding:0 10px;border-radius:6px;font-size:14px;font-weight:500;color:var(--muted)}
+.snav a:hover{background:var(--panel);color:var(--fg)}
+.snav a[aria-current="page"]{background:var(--panel2);color:var(--fg);font-weight:700}
+.snav .cnt{margin-left:auto;font-size:12px;color:var(--faint)}
+.badge{display:inline-flex;align-items:center;justify-content:center;min-width:20px;height:20px;padding:0 6px;border-radius:10px;background:var(--fg);color:var(--bg);font-size:11px;font-weight:800}
+.snav .badge{margin-left:auto}
+.me{margin-top:auto;display:flex;align-items:center;gap:12px;padding:12px 8px 0;border-top:1px solid var(--rule)}
+.avatar{width:36px;height:36px;border-radius:50%;background:var(--fg);color:var(--bg);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;flex-shrink:0}
+.col{flex:1;min-width:0;display:flex;flex-direction:column}
+.mtop{display:none;justify-content:space-between;align-items:center;gap:12px;padding:8px 16px;border-bottom:1px solid var(--rule);position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);z-index:20}
+.head{display:flex;flex-wrap:wrap;align-items:center;gap:12px;padding:14px 40px;border-bottom:1px solid var(--rule);position:relative;z-index:15}
+.search{position:relative;flex:1 1 220px;max-width:560px}
+.search label{display:flex;align-items:center;gap:10px;height:44px;padding:0 14px;border:1px solid var(--line);border-radius:6px;color:var(--muted)}
+.search input{flex:1;min-width:0;height:100%;background:transparent;border:none;color:var(--fg);font-size:14px}
+.search input:focus{outline:none}
+.search label:focus-within{border-color:var(--fg)}
+.results{position:absolute;left:0;right:0;top:50px;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:6px;display:none;max-height:60vh;overflow:auto;box-shadow:0 16px 40px rgba(0,0,0,.6)}
+.results.on{display:block}
+.results a{display:flex;justify-content:space-between;gap:12px;padding:10px;border-radius:6px;font-size:14px}
+.results a:hover,.results a:focus{background:var(--panel2)}
+.iconbtn{position:relative;display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border:1px solid var(--line);border-radius:6px;background:transparent;cursor:pointer}
+.iconbtn .dot{position:absolute;top:9px;right:10px;width:8px;height:8px;border-radius:50%;background:var(--r)}
+.spacer{flex:1}
+main{display:block;outline:none}
+.opsmain{width:100%;max-width:1240px;padding:32px 40px 72px}
+.mtab{display:none;position:sticky;bottom:0;z-index:20;grid-template-columns:repeat(5,minmax(0,1fr));background:var(--bg);border-top:1px solid var(--rule);padding:6px 4px calc(6px + env(safe-area-inset-bottom,0px));margin-top:auto}
+.mtab a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-height:52px;font-size:11px;font-weight:500;color:var(--faint)}
+.mtab a[aria-current="page"]{color:var(--fg);font-weight:700}
+.mtab .ico{position:relative;display:flex}
+.mtab .badge{position:absolute;top:-6px;right:-12px;min-width:18px;height:18px;font-size:10px}
+@media (max-width: 899px){
+  .side{display:none}.mtop{display:flex}.mtab{display:grid}
+  .head{padding:10px 16px;flex-wrap:nowrap}.head .lbl{display:none}.head .spacer{display:none}.search{flex:1 1 auto;min-width:0}.head .btn{padding:0 14px}
+  .opsmain{padding:24px 16px 32px}
+}
+
+/* Dashboard */
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));border-top:1px solid var(--rule)}
+.kpis a{background:var(--bg);padding:16px 14px;display:flex;flex-direction:column;gap:5px;box-shadow:inset -1px 0 0 var(--rule),inset 0 -1px 0 var(--rule)}
+.kpis a:hover{background:var(--panel)}
+.kpis .k{font-size:13px;color:var(--muted);display:flex;align-items:center;gap:6px}
+.kpis .v{font-stretch:125%;font-weight:800;font-size:30px;line-height:1}
+.kpis .s{font-size:12px;color:var(--muted)}
+.kdot{width:8px;height:8px;border-radius:50%;background:var(--c)}
+.duo{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;align-items:start}
+.duo>.span2{grid-column:span 2}
+@media (max-width: 1199px){.duo{grid-template-columns:minmax(0,1fr)}.duo>.span2{grid-column:auto}}
+.spot .city{font-size:clamp(52px,7vw,76px)}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
+.card{border:1px solid var(--line);border-radius:8px;padding:18px;display:flex;flex-direction:column;gap:12px}
+.card:hover{border-color:var(--faint)}
+.card .city{font-stretch:125%;font-weight:900;font-size:24px;line-height:1;text-transform:uppercase}
+.card .foot{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;padding-top:12px;border-top:1px solid var(--rule);font-size:12px;color:var(--muted)}
+.card .foot b{display:block;font-size:14px;color:var(--fg);font-weight:600}
+.alerts .trow{display:flex;gap:16px;align-items:center;padding:13px 0;border-bottom:1px solid var(--rule);font-size:14px}
+.alerts .c1{width:170px;flex-shrink:0}.alerts .c2{width:190px;flex-shrink:0;font-weight:600}.alerts .c3{flex:1;min-width:0;color:var(--muted)}.alerts .c4{width:140px;flex-shrink:0;color:var(--muted)}.alerts .c5{width:120px;flex-shrink:0;text-align:right;font-weight:600}
+.alerts .thead{font-size:12px;color:var(--muted);padding:8px 0}
+@media (max-width: 760px){
+  .alerts .thead{display:none}
+  .alerts .trow{flex-wrap:wrap;gap:4px 12px}
+  .alerts .c1{flex:1 1 auto;width:auto}.alerts .c5{order:1;width:auto}
+  .alerts .c2,.alerts .c3,.alerts .c4{order:2;flex:1 1 100%;width:auto}
+}
+
+/* Table */
+.tbl{width:100%;border-collapse:collapse;font-size:14px}
+.tbl th{text-align:left;font-size:12px;font-weight:600;color:var(--muted);padding:10px 12px 10px 0;border-bottom:1px solid var(--line);white-space:nowrap}
+.tbl td{padding:13px 12px 13px 0;border-bottom:1px solid var(--rule);vertical-align:middle}
+.tbl tr[data-href]{cursor:pointer}.tbl tr[data-href]:hover td{background:var(--panel)}
+.tw{overflow-x:auto}
+
+/* Show workspace */
+.tabs{display:flex;gap:4px;overflow-x:auto;border-bottom:1px solid var(--rule);margin:24px 0 28px;scrollbar-width:none}
+.tabs a{display:inline-flex;align-items:center;min-height:44px;padding:0 12px;font-size:14px;font-weight:600;color:var(--muted);white-space:nowrap;border-bottom:2px solid transparent;margin-bottom:-1px}
+.tabs a[aria-current="page"]{color:var(--fg);border-bottom-color:var(--fg)}
+.tl{border-left:1px solid var(--line);margin-left:6px;padding-left:20px;display:flex;flex-direction:column;gap:0}
+.tl .ev{position:relative;padding:12px 0;border-bottom:1px solid var(--rule)}
+.tl .ev::before{content:"";position:absolute;left:-26px;top:18px;width:11px;height:11px;border-radius:50%;background:var(--c,var(--fg));border:2px solid var(--bg)}
+.tl .time{font-variant-numeric:tabular-nums;font-weight:800;font-stretch:115%;font-size:17px;margin-right:12px}
+.chk{display:flex;align-items:center;gap:12px;min-height:48px;padding:6px 0;border-bottom:1px solid var(--rule);width:100%;background:transparent;border-left:none;border-right:none;border-top:none;text-align:left;cursor:pointer;font-size:15px}
+.box{width:22px;height:22px;border-radius:5px;border:1.5px solid var(--line);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.chk[aria-pressed="true"] .box{background:var(--fg);border-color:var(--fg);color:var(--bg)}
+.chk[aria-pressed="true"] .lbl2{color:var(--muted);text-decoration:line-through}
+
+/* Kanban */
+.kan{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(240px,1fr);gap:14px;overflow-x:auto;padding-bottom:8px}
+.kcol{background:var(--panel);border-radius:8px;padding:12px;display:flex;flex-direction:column;gap:10px;min-height:120px}
+.kcard{background:var(--bg);border:1px solid var(--rule);border-radius:6px;padding:12px;display:flex;flex-direction:column;gap:8px}
+
+/* Calendar */
+.cal{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:8px;overflow:hidden}
+.cal .wd{background:var(--bg);padding:8px;font-size:12px;color:var(--muted);text-align:center}
+.cal .d{background:var(--bg);min-height:92px;padding:6px;display:flex;flex-direction:column;gap:4px;font-size:12px}
+.cal .d.out{color:var(--faint)}.cal .d.today .num{background:var(--fg);color:var(--bg)}
+.cal .num{align-self:flex-start;min-width:24px;height:24px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;padding:0 6px}
+.cal .ev2{display:block;padding:3px 6px;border-radius:4px;background:var(--panel2);border-left:3px solid var(--c);font-size:11px;font-weight:600;line-height:1.3;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+@media (max-width: 760px){.cal .d{min-height:56px}.cal .ev2{font-size:0;padding:0;height:6px;border-left:none;background:var(--c)}}
+
+/* Morten view */
+.mv{max-width:540px;margin:0 auto;min-height:100vh;display:flex;flex-direction:column}
+.mv .mh{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 20px;position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);z-index:20}
+.mv main{flex:1;padding:8px 20px 32px;display:flex;flex-direction:column;gap:32px}
+.mv .mtab{display:grid}
+.tonight{background:var(--fg);color:var(--bg);border-radius:8px;padding:22px;display:flex;flex-direction:column;gap:16px}
+.tonight .city{font-size:60px}
+.tonight .sub{color:var(--muted)}
+:root:not([data-theme="light"]) .tonight .sub{color:#404040}
+.tonight .grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;padding-top:14px;border-top:1px solid rgba(127,127,127,.3)}
+.tonight .grid3 span{display:block}
+.tonight .btn{background:var(--bg);color:var(--fg);border-color:var(--bg)}
+.dcard{border:1px solid var(--line);border-radius:8px;padding:18px;display:flex;flex-direction:column;gap:12px}
+.reco{background:var(--panel2);border-radius:6px;padding:12px 14px;display:flex;flex-direction:column;gap:4px}
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.opt{display:flex;flex-direction:column;align-items:flex-start;gap:6px;padding:14px;border:1px solid var(--line);border-radius:6px;background:transparent;text-align:left;cursor:pointer}
+.opt[aria-pressed="true"]{border-color:var(--fg);box-shadow:inset 0 0 0 1px var(--fg);background:var(--panel)}
+.opt .tag{font-size:11px;font-weight:800;color:var(--g)}
+.done{display:flex;align-items:center;gap:8px;font-weight:700;color:var(--g)}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<div id="toast" role="status" aria-live="polite"></div>
+<script>
+(function(){
+'use strict';
+/* ================= helpers ================= */
+var TODAY='2026-10-01';
+var WD=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'],MO=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+function pd(s){var p=s.split('-').map(Number);return new Date(Date.UTC(p[0],p[1]-1,p[2]));}
+function iso(d){return d.toISOString().slice(0,10);}
+function add(s,n){var t=pd(s);t.setUTCDate(t.getUTCDate()+n);return iso(t);}
+function diff(a,b){return Math.round((pd(b)-pd(a))/864e5);}
+function fmt(s){var t=pd(s);return WD[t.getUTCDay()]+' '+t.getUTCDate()+' '+MO[t.getUTCMonth()];}
+function fmtY(s){var t=pd(s);return fmt(s)+(t.getUTCFullYear()!==2026?' '+t.getUTCFullYear():'');}
+function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+function when(s){var d=diff(TODAY,s);return d===0?'Today':d===1?'Tomorrow':d<0?(-d)+' day'+(d===-1?'':'s')+' late':'In '+d+' days';}
+var P={
+grid:'<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>',
+cal:'<rect x="3" y="5" width="18" height="16" rx="1"/><path d="M3 10h18M8 3v4M16 3v4"/>',
+ticket:'<path d="M4 7h16v3a2 2 0 0 0 0 4v3H4v-3a2 2 0 0 0 0-4z"/><path d="M14 7v10"/>',
+tasks:'<path d="M10 6h10M10 12h10M10 18h10"/><path d="M4 6l1.5 1.5L8 5M4 12l1.5 1.5L8 11M4 18l1.5 1.5L8 17"/>',
+flag:'<path d="M5 21V4h12l-2.5 4.5L17 13H5"/>',
+team:'<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7"/><path d="M18 14.5a6 6 0 0 1 3.5 5.5"/>',
+doc:'<path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/>',
+money:'<rect x="3" y="6" width="18" height="13" rx="1"/><path d="M3 10h18"/><path d="M15 15h3"/>',
+contacts:'<rect x="4" y="3" width="16" height="18" rx="1"/><circle cx="12" cy="10" r="3"/><path d="M8 17a4 4 0 0 1 8 0"/>',
+reports:'<path d="M4 20V10M10 20V4M16 20v-7M2 20h20"/>',
+settings:'<path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/>',
+search:'<circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/>',
+bell:'<path d="M6 16v-5a6 6 0 0 1 12 0v5l2 2H4z"/><path d="M10 21h4"/>',
+plus:'<path d="M12 5v14M5 12h14"/>',
+menu:'<path d="M4 6h16M4 12h16M4 18h16"/>',
+home:'<path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/>',
+phone:'<path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/>',
+msg:'<path d="M4 5h16v11H8l-4 4z"/>',
+check:'<path d="M5 12.5l4.5 4.5L19 7.5"/>',
+clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+alert:'<path d="M12 3l10 18H2z"/><path d="M12 10v4"/><path d="M12 17.5v.5"/>',
+block:'<circle cx="12" cy="12" r="9"/><path d="M5.6 5.6l12.8 12.8"/>',
+user:'<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>',
+dashed:'<circle cx="12" cy="12" r="9" stroke-dasharray="3 3"/>',
+plane:'<path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4z"/>',
+car:'<path d="M5 16h14l-1.5-5h-11z"/><path d="M7 16v2M17 16v2"/>',
+bed:'<path d="M3 18V7M3 13h18v5M21 13a3 3 0 0 0-3-3h-7v3"/>',
+right:'<path d="M9 5l7 7-7 7"/>',left:'<path d="M15 5l-7 7 7 7"/>',
+x:'<path d="M6 6l12 12M18 6L6 18"/>'
+};
+function ic(n,s,w){s=s||18;w=w||1.75;return '<svg aria-hidden="true" width="'+s+'" height="'+s+'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="'+w+'" stroke-linecap="round" stroke-linejoin="round">'+P[n]+'</svg>';}
+
+/* ================= data ================= */
+/* Dates and venues: MORTEN's public tour listing. Monaco and Paris events, statuses, tasks, people: sample data. */
+var STAT={ready:['Ready','g','check'],action:['Action required','a','clock'],risk:['At risk','r','alert'],blocked:['Blocked','r','block'],awaiting:['Awaiting Morten','b','user'],planning:['In planning','n','dashed']};
+var SHOWS=[
+{id:'giza',date:'2026-10-01',city:'Giza',country:'Egypt',venue:'The Village West',type:'Club show',booking:'Confirmed',lead:'booking',status:'ready',ready:100,missing:[],travel:'Booked',hotel:'Booked',contract:'Signed',deposit:'Received',production:'Confirmed',marketing:'Done',set:'23:30',tz:'GMT+3'},
+{id:'deadsea',date:'2026-10-02',city:'Dead Sea',country:'Jordan',venue:'Panorama Dead Sea',type:'Open-air show',booking:'Confirmed',lead:'booking',status:'action',ready:83,missing:['Airport transfer'],travel:'Booked',hotel:'Day room booked',contract:'Signed',deposit:'Received',production:'Confirmed',marketing:'Done',set:'17:30',tz:'GMT+3',note:'Same day as Ibiza.'},
+{id:'ibiza',date:'2026-10-02',city:'Ibiza',country:'Spain',venue:'UNVRS',type:'Club show',booking:'Confirmed',lead:'booking',status:'risk',ready:67,missing:['Flight from the Dead Sea'],travel:'Not booked',hotel:'Booked',contract:'Signed',deposit:'Received',production:'Set time depends on flight',marketing:'Done',set:'01:30',tz:'GMT+2',note:'Same day as the Dead Sea. The flight from Amman is tracked here.'},
+{id:'dubai',date:'2026-10-10',city:'Dubai',country:'UAE',venue:'Coca-Cola Arena',type:'Arena show',booking:'Confirmed',lead:'booking',status:'blocked',ready:67,missing:['Tech rider sign-off'],travel:'Booked',hotel:'Booked',contract:'Signed',deposit:'Received',production:'Blocked: rider not signed off',marketing:'Filming access pending',set:null,tz:'GMT+4'},
+{id:'jakarta',date:'2026-10-15',city:'Jakarta',country:'Indonesia',venue:'Black Owl, Kelapa Gading',type:'Club show',booking:'Confirmed',lead:'booking',status:'action',ready:75,missing:['Hotel'],travel:'Flights only',hotel:'Not booked',contract:'Signed',deposit:'Received',production:'Confirmed',marketing:'Plan agreed',set:null,tz:'GMT+7'},
+{id:'seoul',date:'2026-10-16',city:'Seoul',country:'South Korea',venue:'Lion Seoul',type:'Club show',booking:'Confirmed',lead:'booking',status:'action',ready:50,missing:['Flight from Jakarta','Hotel'],travel:'Not booked',hotel:'Not booked',contract:'Signed',deposit:'Received',production:'In progress',marketing:'Plan agreed',set:null,tz:'GMT+9',note:'Day after Jakarta. The flight from Jakarta is tracked here.'},
+{id:'shanghai',date:'2026-10-17',city:'Shanghai',country:'China',venue:'Hero Dome',type:'Festival',booking:'Confirmed',lead:'booking',status:'awaiting',ready:60,missing:['Artwork approval','Crew budget'],travel:'Booked',hotel:'Booked',contract:'Signed',deposit:'Received',production:'Confirmed',marketing:'Artwork awaiting Morten',set:null,tz:'GMT+8',note:'Day after Seoul. The flight from Seoul is tracked here.'},
+{id:'amsterdam',date:'2026-10-22',city:'Amsterdam',country:'Netherlands',venue:'Panama',type:'Club show',booking:'Confirmed',lead:'booking',status:'planning',ready:33,missing:['Hotel','Transfers','Content plan'],travel:'Flights only',hotel:'Not booked',contract:'Signed',deposit:'Due Fri 9 Oct',production:'In progress',marketing:'Not started',set:null,tz:'GMT+2'},
+{id:'montmorot',date:'2026-10-23',city:'Montmorot',country:'France',venue:'Juraparc',type:'Live show',booking:'Confirmed',lead:'booking',status:'planning',ready:25,missing:['Trip from Amsterdam','Hotel'],travel:'Not booked',hotel:'Not booked',contract:'Signed',deposit:'Received',production:'Not started',marketing:'Not started',set:null,tz:'GMT+2',note:'Day after Amsterdam.'},
+{id:'sanbernardino',date:'2026-10-30',city:'San Bernardino',country:'USA',venue:'NOS Event Center',type:'Live show',booking:'Confirmed',lead:'bookingus',status:'planning',ready:30,missing:['Hotel','Transfers'],travel:'Flights only',hotel:'Not booked',contract:'Signed',deposit:'Due Fri 16 Oct',production:'Not started',marketing:'Not started',set:null,tz:'GMT-7'},
+{id:'losangeles',date:'2026-10-31',city:'Los Angeles',country:'USA',venue:'Academy LA',type:'Club show',booking:'Confirmed',lead:'bookingus',status:'planning',ready:25,missing:['Drive from San Bernardino','Hotel'],travel:'Not booked',hotel:'Not booked',contract:'Signed',deposit:'Due Fri 16 Oct',production:'Not started',marketing:'Not started',set:null,tz:'GMT-7',note:'Day after San Bernardino.'},
+{id:'monaco',date:'2026-11-07',city:'Monaco',country:'Monaco',venue:'Private event, venue under NDA',type:'Private event',booking:'Provisional',lead:'booking',status:'action',label:'Awaiting contract',ready:20,missing:['Signed contract'],travel:'Not started',hotel:'Not started',contract:'Awaiting signature',deposit:'Not issued yet',production:'Not started',marketing:'No public marketing',set:null,tz:'GMT+1',sample:true},
+{id:'paris',date:'2026-11-20',city:'Paris',country:'France',venue:'Brand event, venue under NDA',type:'Brand event',booking:'Confirmed',lead:'booking',status:'risk',label:'Deposit overdue',ready:40,missing:['Deposit, 6 days late'],travel:'Not started',hotel:'Not started',contract:'Signed',deposit:'Overdue, 6 days',production:'Not started',marketing:'Under embargo',set:null,tz:'GMT+1',sample:true},
+{id:'prague',date:'2026-11-27',city:'Prague',country:'Czech Republic',venue:'O2 arena',type:'Arena show',booking:'Confirmed',lead:'booking',status:'planning',ready:15,missing:['Travel','Hotel','Production details'],travel:'Not started',hotel:'Not started',contract:'Signed',deposit:'Due Fri 30 Oct',production:'Details received',marketing:'Not started',set:null,tz:'GMT+1'},
+{id:'pattaya',date:'2026-12-13',city:'Pattaya',country:'Thailand',venue:'Tomorrowland Bar',type:'Club show',booking:'Confirmed',lead:'booking',status:'planning',ready:10,missing:['Travel','Hotel','Production'],travel:'Not started',hotel:'Not started',contract:'Signed',deposit:'Due Fri 13 Nov',production:'Not started',marketing:'Not started',set:null,tz:'GMT+7'},
+{id:'gdansk',date:'2027-02-13',city:'Gdańsk',country:'Poland',venue:'Ergo Arena',type:'Arena show',booking:'Confirmed',lead:'booking',status:'planning',ready:10,missing:['Travel','Hotel','Production'],travel:'Not started',hotel:'Not started',contract:'Signed',deposit:'Due Fri 15 Jan',production:'Not started',marketing:'Not started',set:null,tz:'GMT+1'}
+];
+var TEAM=[
+{id:'ops',name:'Célia',role:'Operations Manager'},
+{id:'booking',name:'Booking Global',role:'Booking agent, rest of world'},
+{id:'bookingus',name:'Booking US',role:'Booking agent, US and South America'},
+{id:'travel',name:'[Travel coordinator]',role:'Tour and logistics'},
+{id:'production',name:'[Production manager]',role:'Production and technical'},
+{id:'social',name:'[Social media manager]',role:'Marketing and content'},
+{id:'finance',name:'[Accountant]',role:'Finance'}
+];
+var TSTAT={'Not started':'n','In progress':'b','Waiting on external party':'a','Awaiting Morten':'b','Changes requested':'a','Validated':'g','Blocked':'r','Completed':'g','Not applicable':'n'};
+var TSTAT_LIST=Object.keys(TSTAT);
+var TASKS=[
+{id:'t1',title:'Book the Amman to Ibiza flight',show:'ibiza',cat:'Travel',owner:'travel',due:'2026-10-01',time:'16:00',prio:'Critical',status:'Awaiting Morten',decision:'flight'},
+{id:'t2',title:'Confirm the Amman airport transfer',show:'deadsea',cat:'Travel',owner:'travel',due:'2026-10-01',time:'18:00',prio:'High',status:'Waiting on external party'},
+{id:'t3',title:'Confirm the UNVRS set time',show:'ibiza',cat:'Production',owner:'booking',due:'2026-10-01',time:'18:00',prio:'High',status:'In progress'},
+{id:'t4',title:'Get the tech rider signed off',show:'dubai',cat:'Production',owner:'production',due:'2026-09-29',prio:'Critical',status:'Blocked',blocker:"The promoter's production team has not replied since Mon 28 Sep."},
+{id:'t5',title:'Book the hotel',show:'jakarta',cat:'Travel',owner:'travel',due:'2026-10-05',prio:'High',status:'In progress'},
+{id:'t6',title:'Book the Jakarta to Seoul flight',show:'seoul',cat:'Travel',owner:'travel',due:'2026-10-06',prio:'High',status:'Not started'},
+{id:'t7',title:'Approval of the announcement artwork',show:'shanghai',cat:'Marketing',owner:'social',due:'2026-10-03',prio:'High',status:'Awaiting Morten',decision:'artwork'},
+{id:'t8',title:'Book the content crew',show:'shanghai',cat:'Marketing',owner:'social',due:'2026-10-05',prio:'Normal',status:'Awaiting Morten',decision:'crew'},
+{id:'t9',title:'Chase the deposit',show:'paris',cat:'Finance',owner:'finance',due:'2026-09-25',prio:'Critical',status:'In progress'},
+{id:'t10',title:'Get the contract signed',show:'monaco',cat:'Booking',owner:'booking',due:'2026-09-30',prio:'High',status:'Waiting on external party'},
+{id:'t11',title:'Reply to the podcast request',show:'losangeles',cat:'Marketing',owner:'bookingus',due:'2026-10-07',prio:'Normal',status:'Awaiting Morten',decision:'podcast'},
+{id:'t12',title:'Collect the Giza expenses',show:'giza',cat:'Finance',owner:'ops',due:'2026-10-05',prio:'Normal',status:'Not started'},
+{id:'t13',title:'Send the artist info pack',show:'montmorot',cat:'Booking',owner:'booking',due:'2026-10-09',prio:'Normal',status:'Not started'},
+{id:'t14',title:'Book the drive to LA',show:'losangeles',cat:'Travel',owner:'travel',due:'2026-10-16',prio:'Normal',status:'Not started'},
+{id:'t15',title:'Shortlist hotels',show:'amsterdam',cat:'Travel',owner:'travel',due:'2026-10-09',prio:'Normal',status:'In progress'},
+{id:'t16',title:"Send tonight's guest list",show:'giza',cat:'Production',owner:'ops',due:'2026-10-01',time:'17:00',prio:'Normal',status:'Completed'},
+{id:'t17',title:'Send the show-day brief to Morten',show:'giza',cat:'Operations',owner:'ops',due:'2026-09-30',prio:'Normal',status:'Completed'},
+{id:'t18',title:'Get filming access',show:'dubai',cat:'Marketing',owner:'social',due:'2026-10-07',prio:'Normal',status:'Waiting on external party'},
+{id:'t19',title:'Weekly check-in agenda',show:'giza',cat:'Operations',owner:'ops',due:'2026-10-05',prio:'Low',status:'Not started'}
+];
+var DECISIONS=[
+{id:'flight',show:'ibiza',bucket:'Urgent today',due:'2026-10-01',time:'14:00',title:'Choose your flight from the Dead Sea to Ibiza',short:'Flight option, Dead Sea to Ibiza',from:'travel',
+ why:'You play both shows on the same day. The current plan lands you after your set.',impact:'Without a choice by 14:00, the remaining seats may go and the Ibiza set is at risk.',
+ options:[{v:'A',t:'Option A',s:'Leave Amman 18:30, land 23:50. Shorter Dead Sea set.'},{v:'B',t:'Option B',s:'Leave Amman 20:15, land 01:40. UNVRS moves your set to 03:00.',reco:true}],
+ reco:'Option B: leave Amman 20:15, land 01:40. UNVRS moves your set to 03:00.',recoBy:'Célia, Operations',docs:[]},
+{id:'artwork',show:'shanghai',bucket:'This week',due:'2026-10-03',title:'Approve the Shanghai announcement artwork',short:'Announcement artwork',from:'social',
+ why:'The promoter publishes the line-up artwork on Mon 5 Oct.',impact:'A late approval pushes the announcement back.',
+ options:[{v:'approve',t:'Approve',reco:true},{v:'reject',t:'Reject'},{v:'changes',t:'Request changes'}],reco:'Approve. Logo and credits are correct.',recoBy:'Social',docs:['shanghai-marketing']},
+{id:'crew',show:'shanghai',bucket:'This week',due:'2026-10-05',title:'Approve the content crew budget for Shanghai',short:'Content crew budget',from:'social',
+ why:'Two people to film the show and backstage for a recap video. Budget: [amount].',impact:'Without it, Social works with the festival footage only.',
+ options:[{v:'approve',t:'Approve',reco:true},{v:'reject',t:'Decline'}],reco:'Approve. Shanghai is the biggest crowd of the month.',recoBy:'Social',docs:[]},
+{id:'podcast',show:'losangeles',bucket:'Upcoming',due:'2026-10-07',title:'Podcast interview in Los Angeles',short:'Podcast interview',from:'bookingus',
+ why:'30 minutes, recorded on Thu 29 Oct, the day before San Bernardino.',impact:'Fits in a free afternoon. No travel change.',
+ options:[{v:'approve',t:'Accept',reco:true},{v:'reject',t:'Decline'}],reco:'Accept. Booking US recommends it.',recoBy:'Booking US',docs:[]}
+];
+var COMPLETED=[{t:"Giza guest list (6 names)",d:'Tue 29 Sep',r:'Approved'},{t:'Jakarta hotel budget',d:'Mon 28 Sep',r:'Approved'},{t:'Prague support act',d:'Fri 25 Sep',r:'Approved'}];
+var FYI=[{t:'Prague: first production details received',s:'Production reviews them in November.',href:'#/ops/show/prague/production'},{t:"New Year's Eve: new booking enquiry",s:"Booking Global is reviewing it. You'll get a decision if it moves forward.",href:'#/ops/attention'}];
+var NOTIFS=[
+{t:'Decision needed: Dead Sea to Ibiza flight, by 14:00',s:'Morten was notified at 09:02',href:'#/ops/attention',u:true},
+{t:'Dubai tech rider is 2 days late',s:'Owner: Production',href:'#/ops/show/dubai/production',u:true},
+{t:'Paris deposit overdue (6 days)',s:'Owner: Finance',href:'#/ops/finances',u:true},
+{t:'Morten opened the Giza brief',s:'Wed 30 Sep, 18:12',href:'#/ops/show/giza/schedule'},
+{t:"New booking enquiry for New Year's Eve",s:'Booking Global',href:'#/ops/attention'}
+];
+
+var state={dec:{},post:{},filter:'all',view:'cards',tfilter:'all',tview:'list',cal:'all',set:{decisions:true,changes:true,blockers:true,showday:true,routine:false,digest:true,weekly:true,inapp:true},wiz:{step:1,city:'',country:'',venue:'',date:'',type:'Club show',lead:'booking',template:'Standard show'},created:0};
+
+/* ================= derived ================= */
+function team(id){for(var i=0;i<TEAM.length;i++){if(TEAM[i].id===id){return TEAM[i];}}return {id:id,name:id,role:''};}
+function show(id){var s=null;SHOWS.forEach(function(x){if(x.id===id){s=x;}});if(!s){return null;}var o={};for(var k in s){o[k]=s[k];}
+ if(id==='ibiza'&&state.dec.flight){o.status='action';o.ready=83;o.missing=['Flight booking in progress'];o.travel='Booking in progress';o.production='Set at '+(state.dec.flight==='B'?'03:00':'01:30');}
+ if(id==='shanghai'){var a=state.dec.artwork,c=state.dec.crew;if(a&&c){o.status=a==='approve'?'action':'action';o.ready=80;o.missing=a==='approve'?['Content crew booking']:['Artwork changes'];o.marketing=a==='approve'?'Artwork approved':'Artwork changes requested';}else if(a||c){o.ready=70;o.missing=[!a?'Artwork approval':'Crew budget'];}}
+ return o;}
+function shows(){return SHOWS.map(function(s){return show(s.id);});}
+function upcoming(){return shows().filter(function(s){return s.date>=TODAY;});}
+function stat(s){var m=STAT[s.status];return {label:s.label||m[0],c:m[1],i:m[2]};}
+function stLine(s){var m=stat(s);return '<span class="st '+m.c+'">'+ic(m.i,14,2)+esc(m.label)+'</span>';}
+function decision(id){var d=null;DECISIONS.forEach(function(x){if(x.id===id){d=x;}});return d;}
+function pending(){return DECISIONS.filter(function(d){return !state.dec[d.id];});}
+function decLabel(d,v){var o=null;d.options.forEach(function(x){if(x.v===v){o=x;}});return o?o.t:'';}
+function task(t){var o={};for(var k in t){o[k]=t[k];}if(o.decision&&state.dec[o.decision]){var v=state.dec[o.decision];o.status=v==='reject'?'Not applicable':v==='changes'?'Changes requested':'In progress';}if(state['ts_'+t.id]){o.status=state['ts_'+t.id];}return o;}
+function tasks(){return TASKS.map(task);}
+function overdue(t){return t.due<TODAY&&['Completed','Validated','Not applicable'].indexOf(t.status)<0;}
+function dueTxt(t){var d=diff(TODAY,t.due);if(overdue(t)){return (-d)+' day'+(d===-1?'':'s')+' late';}return (d===0?'Today':fmt(t.due))+(t.time?' '+t.time:'');}
+function decDue(d){return (d.due===TODAY?'Today':fmt(d.due))+(d.time?' '+d.time:'');}
+function docsFor(s){var ok=function(v,good){return good.indexOf(v)>-1;};return [
+ {id:s.id+'-contract',name:'Contract',type:'Contract',status:s.contract,c:s.contract==='Signed'?'g':'a'},
+ {id:s.id+'-rider',name:'Technical rider',type:'Rider',status:s.status==='blocked'?'Sent, not signed off':ok(s.production,['Confirmed'])?'Acknowledged':'Sent',c:s.status==='blocked'?'r':ok(s.production,['Confirmed'])?'g':'n'},
+ {id:s.id+'-flights',name:'Flight confirmation',type:'Travel',status:ok(s.travel,['Booked','Flights only'])?'Received':'Pending',c:ok(s.travel,['Booked','Flights only'])?'g':'n'},
+ {id:s.id+'-hotel',name:'Hotel confirmation',type:'Travel',status:ok(s.hotel,['Booked','Day room booked'])?'Received':'Pending',c:ok(s.hotel,['Booked','Day room booked'])?'g':'n'},
+ {id:s.id+'-schedule',name:'Show-day schedule',type:'Schedule',status:s.date===TODAY?'Final':'Draft',c:s.date===TODAY?'g':'n'},
+ {id:s.id+'-marketing',name:'Marketing assets',type:'Marketing',status:s.marketing,c:/awaiting|pending/i.test(s.marketing)?'b':/Done|approved/i.test(s.marketing)?'g':'n'}
+];}
+function allDocs(){var out=[];upcoming().forEach(function(s){docsFor(s).forEach(function(d){d.show=s.id;out.push(d);});});return out;}
+function alerts(){var out=[];
+ if(!state.dec.flight){out.push({k:'Critical',c:'r',i:'alert',show:'Ibiza',t:'Same-day connection from the Dead Sea not booked',o:'Travel',d:'Today 14:00',h:'#/ops/show/ibiza/travel'});}
+ out.push({k:'Schedule conflict',c:'a',i:'cal',show:'Dead Sea and Ibiza',t:'Two shows on Fri 2 Oct',o:'Operations',d:state.dec.flight?'Resolved':'Today',h:'#/ops/calendar'});
+ tasks().forEach(function(t){if(overdue(t)){var s=show(t.show);out.push({k:t.status==='Blocked'?'Blocked':t.cat==='Finance'?'Payment':t.cat==='Booking'?'Contract':'Overdue',c:'r',i:t.status==='Blocked'?'block':t.cat==='Finance'?'money':'doc',show:s.city+(s.sample?' ('+s.type.toLowerCase()+')':''),t:t.title+(t.blocker?'. '+t.blocker:''),o:team(t.owner).name.replace(/^\[|\]$/g,''),d:dueTxt(t),h:'#/ops/show/'+t.show+'/tasks'});}});
+ shows().forEach(function(s){var d=diff(TODAY,s.date);if(s.travel==='Not booked'&&d<=21&&d>=0&&s.id!=='ibiza'){out.push({k:'Travel',c:'a',i:'plane',show:s.city,t:'Travel not booked: '+s.missing.join(', '),o:'Travel',d:'In '+d+' days',h:'#/ops/show/'+s.id+'/travel'});}});
+ out.push({k:'Transfer',c:'a',i:'car',show:'Dead Sea',t:'Airport transfer from Amman not confirmed',o:'Travel',d:'Today 18:00',h:'#/ops/show/deadsea/travel'});
+ return out;}
+
+/* ================= shared bits ================= */
+function crumb(h,label){return '<a class="back" href="'+h+'">'+ic('left',18,2)+esc(label)+'</a>';}
+function head(t,lede,right){return '<div class="row-h" style="align-items:flex-end;margin-bottom:28px"><div><h1 class="h1">'+t+'</h1>'+(lede?'<p class="lede">'+lede+'</p>':'')+'</div>'+(right||'')+'</div>';}
+function card(s){var m=stat(s);var appr=DECISIONS.filter(function(d){return d.show===s.id&&!state.dec[d.id];}).length;var blk=tasks().filter(function(t){return t.show===s.id&&t.status==='Blocked';}).length+(s.status==='risk'&&!s.sample?1:0);
+ var tc=s.travel==='Not booked'?(diff(TODAY,s.date)<=3?'r':'a'):'';
+ return '<a class="card" href="#/ops/show/'+s.id+'"><div class="row-h"><span class="small" style="font-weight:600">'+fmtY(s.date)+'</span><span class="small muted">'+when(s.date)+'</span></div>'+
+ '<div style="display:flex;flex-direction:column;gap:4px"><span class="city">'+esc(s.city)+'</span><span class="small muted">'+esc(s.venue)+(s.sample?'':', '+esc(s.country))+'</span><span class="small muted">'+esc(s.type)+', '+s.booking.toLowerCase()+'</span></div>'+
+ '<div style="display:flex;flex-direction:column;gap:6px"><div class="row-h">'+stLine(s)+'<span class="small" style="font-weight:700">'+s.ready+'%</span></div><div class="bar '+m.c+'"><i style="width:'+s.ready+'%"></i></div><span class="small">'+(s.missing.length?'Missing: '+esc(s.missing.join(', ')):'Nothing missing')+'</span></div>'+
+ '<div class="foot"><span>Blockers<b>'+blk+'</b></span><span>Approvals<b>'+appr+'</b></span><span>Travel<b'+(tc?' style="color:var(--'+tc+')"':'')+'>'+esc(s.travel)+'</b></span></div></a>';}
+
+/* ================= OPERATIONS PAGES ================= */
+function pDashboard(){
+ var up=upcoming(),t=tasks(),p=pending();
+ var ready=up.filter(function(s){return s.status==='ready';}),risk=up.filter(function(s){return s.status==='risk'||s.status==='blocked';}),od=t.filter(overdue),travel=up.filter(function(s){return s.travel==='Not booked';});
+ var dueToday=p.filter(function(d){return d.due===TODAY;}).length;
+ var k=function(h,label,v,s,c){return '<a href="'+h+'"><span class="k">'+(c?'<span class="kdot '+c+'"></span>':'')+label+'</span><span class="v">'+v+'</span><span class="s">'+s+'</span></a>';};
+ var kp='<section class="kpis" aria-label="Key figures">'+
+  k('#/ops/shows','Upcoming shows',up.length,(up.length-2)+' public, 2 private')+
+  k('#/ops/shows/ready','Ready',ready.length,ready.map(function(s){return s.city;}).join(', ')||'None','g')+
+  k('#/ops/shows/risk','At risk',risk.length,risk.map(function(s){return s.city;}).join(', ')||'None','r')+
+  k('#/ops/attention','Pending decisions',p.length,dueToday+' due today','b')+
+  k('#/ops/tasks/overdue','Overdue tasks',od.length,od.length?od.map(function(x){return team(x.owner).name.replace(/^\[|\]$/g,'').split(' ')[0];}).join(', '):'None','a')+
+  k('#/ops/finances','Outstanding payments',1,'Paris deposit, 6 days late')+
+  k('#/ops/shows','Travel to book',travel.length,travel.map(function(s){return s.city;}).join(', ')||'None')+'</section>';
+ var n=up[0];
+ var spot='<section class="panel span2 spot" aria-label="Next show"><div class="stack" style="gap:22px">'+
+  '<div class="row-h"><span style="font-weight:700">'+(n.date===TODAY?'Next show, tonight':'Next show')+'</span><span class="small muted" style="display:inline-flex;gap:6px;align-items:center">'+ic('clock',16,2)+'On stage in 13 h 30 min</span></div>'+
+  '<div class="row-h" style="align-items:flex-end;gap:20px"><div style="display:flex;flex-direction:column;gap:8px"><a href="#/ops/show/'+n.id+'" class="disp city">'+esc(n.city)+'</a><span class="muted">'+esc(n.venue)+', '+esc(n.country)+'. '+esc(n.type)+', booked by '+team(n.lead).name+'.</span></div>'+
+  '<div style="flex:0 1 220px;min-width:200px;display:flex;flex-direction:column;gap:8px"><div class="row-h">'+stLine(n)+'<span class="small" style="font-weight:700">6 of 6</span></div><div class="bar g"><i style="width:'+n.ready+'%"></i></div><span class="small muted">No critical actions left</span></div></div>'+
+  '<div class="kv" style="padding-top:18px;border-top:1px solid var(--rule)">'+
+   '<div><span class="k">Hotel departure</span><span class="v">21:30</span><span class="small muted">Driver: [Driver name]</span></div>'+
+   '<div><span class="k">Stage time</span><span class="v">23:30 to 01:00</span><span class="small muted">Local time '+n.tz+'</span></div>'+
+   '<div><span class="k">Hotel</span><span class="v">[Hotel name]</span><span class="small muted">Check-out Fri 12:00</span></div>'+
+   '<div><span class="k">Weather</span><span class="v">[Forecast]</span><span class="small muted">Placeholder</span></div>'+
+   '<div><span class="k">Promoter contact</span><span class="v">[Promoter name]</span><span class="small muted">[Phone]</span></div>'+
+   '<div><span class="k">Emergency</span><span class="v">[Local contact]</span><span class="small muted">[Phone]</span></div>'+
+   '<div><span class="k">Tomorrow</span><span class="v"><a href="#/ops/show/deadsea" class="lnk" style="min-height:0">Dead Sea</a>, then <a href="#/ops/show/ibiza" class="lnk" style="min-height:0">Ibiza</a></span><span class="small muted">Pick-up 08:30</span></div>'+
+   '<div><span class="k">Brief to Morten</span><span class="v">Sent Wed 30 Sep</span><span class="small muted">Opened at 18:12</span></div></div>'+
+  '<div style="display:flex;gap:10px;flex-wrap:wrap"><a class="btn" href="#/ops/show/'+n.id+'">Open show workspace</a><a class="btn ghost" href="#/ops/show/'+n.id+'/schedule">Show-day schedule</a><button type="button" class="btn ghost" data-toast="Calling [Promoter name]… (prototype)">'+ic('phone',16)+'Call promoter</button></div></div></section>';
+ var att='<section class="panel" aria-label="Morten&#39;s attention"><div class="row-h" style="margin-bottom:8px"><h2 class="h2" style="font-size:18px">Morten\'s attention</h2><span class="small muted">'+p.length+' waiting</span></div><div class="list">'+
+  (p.length?p.map(function(d){var c=d.bucket==='Urgent today'?'r':d.bucket==='This week'?'a':'n';return '<a class="item" href="#/ops/attention/'+d.id+'"><span class="grow"><span class="st '+c+'">'+ic(c==='r'?'alert':c==='a'?'clock':'cal',14,2)+d.bucket+'</span><span class="t">'+esc(d.short)+'</span><span class="s">'+show(d.show).city+'. Requested by '+team(d.from).name.replace(/^\[|\]$/g,'')+'</span></span><span class="end" style="color:var(--'+(c==='r'?'r':'fg')+')">'+decDue(d)+'</span></a>';}).join(''):'<p class="empty">Nothing waiting. Good.</p>')+
+  '</div><a class="btn ghost full" style="margin-top:16px" href="#/m">See it as Morten does</a></section>';
+ var cards='<section class="sec"><div class="row-h"><h2 class="h2">Upcoming shows</h2><a class="lnk" href="#/ops/shows">All '+up.length+' shows '+ic('right',16,2)+'</a></div><div class="cards">'+up.slice(1,9).map(card).join('')+'</div></section>';
+ var al=alerts();
+ var alr='<section class="sec alerts"><div class="row-h"><h2 class="h2">Operational alerts</h2><span class="small muted">'+al.length+' open</span></div><div class="list"><div class="trow thead"><span class="c1">Type</span><span class="c2">Show</span><span class="c3">Issue</span><span class="c4">Owner</span><span class="c5">Due</span></div>'+
+  al.map(function(a){return '<a class="trow" href="'+a.h+'"><span class="c1 st '+a.c+'">'+ic(a.i,15,2)+a.k+'</span><span class="c2 t">'+esc(a.show)+'</span><span class="c3">'+esc(a.t)+'</span><span class="c4">'+esc(a.o)+'</span><span class="c5" style="color:var(--'+(a.c==='r'?'r':'fg')+')">'+esc(a.d)+'</span></a>';}).join('')+'</div></section>';
+ return head('Dashboard','Thursday 1 October 2026. Next show tonight in Giza.')+'<div class="stack">'+kp+'<div class="duo">'+spot+att+'</div>'+cards+alr+'</div>';
+}
+
+function pShows(f){
+ var all=upcoming();f=f||state.filter;
+ var fl={all:function(){return true;},risk:function(s){return s.status==='risk'||s.status==='blocked';},awaiting:function(s){return DECISIONS.some(function(d){return d.show===s.id&&!state.dec[d.id];});},ready:function(s){return s.status==='ready';},private:function(s){return !!s.sample;}};
+ var list=all.filter(fl[f]||fl.all);
+ var chips=[['all','All'],['risk','At risk'],['awaiting','Awaiting Morten'],['ready','Ready'],['private','Private']].map(function(c){return '<a class="chip" href="#/ops/shows/'+c[0]+'" aria-pressed="'+(f===c[0])+'">'+c[1]+' '+all.filter(fl[c[0]]).length+'</a>';}).join('');
+ var seg='<div class="seg" role="group" aria-label="View">'+['cards','table','timeline'].map(function(v){return '<button type="button" data-view="'+v+'" aria-pressed="'+(state.view===v)+'">'+v.charAt(0).toUpperCase()+v.slice(1)+'</button>';}).join('')+'</div>';
+ var body;
+ if(state.view==='table'){body='<div class="tw"><table class="tbl"><thead><tr><th>Date</th><th>Show</th><th>Type</th><th>Lead</th><th>Readiness</th><th>Decisions</th><th>Travel</th><th>Deposit</th><th>Main blocker</th></tr></thead><tbody>'+list.map(function(s){var appr=DECISIONS.filter(function(d){return d.show===s.id&&!state.dec[d.id];}).length;return '<tr data-href="#/ops/show/'+s.id+'"><td style="white-space:nowrap">'+fmtY(s.date)+'</td><td><a href="#/ops/show/'+s.id+'" style="font-weight:700">'+esc(s.city)+'</a><div class="tiny muted">'+esc(s.venue)+'</div></td><td>'+esc(s.type)+'</td><td>'+team(s.lead).name+'</td><td>'+stLine(s)+'<div class="tiny muted">'+s.ready+'%</div></td><td>'+appr+'</td><td>'+esc(s.travel)+'</td><td>'+esc(s.deposit)+'</td><td class="muted">'+esc(s.missing[0]||'None')+'</td></tr>';}).join('')+'</tbody></table></div>';}
+ else if(state.view==='timeline'){var m='';body='<div class="list">'+list.map(function(s){var mm=MO[pd(s.date).getUTCMonth()]+' '+pd(s.date).getUTCFullYear();var hd=mm!==m?'<div class="small muted" style="padding:18px 0 8px;border-bottom:1px solid var(--rule)">'+mm+'</div>':'';m=mm;return hd+'<a class="item" href="#/ops/show/'+s.id+'"><span style="width:52px;font-stretch:125%;font-weight:800;font-size:22px">'+String(pd(s.date).getUTCDate()).padStart(2,'0')+'</span><span class="grow"><span class="t disp" style="font-size:20px">'+esc(s.city)+'</span><span class="s">'+esc(s.venue)+'</span>'+(s.note?'<span class="s">'+ic('right',12,2)+' '+esc(s.note)+'</span>':'')+'</span><span class="end">'+stLine(s)+'<span class="muted">'+when(s.date)+'</span></span></a>';}).join('')+'</div>';}
+ else {body='<div class="cards">'+list.map(card).join('')+'</div>';}
+ return head('Shows',all.length+' upcoming, from tonight to February 2027.','<a class="btn" href="#/ops/new">'+ic('plus',16,2)+'New show</a>')+'<div class="row-h" style="margin-bottom:20px"><div style="display:flex;gap:8px;flex-wrap:wrap">'+chips+'</div>'+seg+'</div>'+(list.length?body:'<p class="empty">No show matches this filter.</p>');
+}
+
+var TABS=[['overview','Overview'],['booking','Booking'],['travel','Travel'],['production','Production'],['marketing','Marketing'],['schedule','Show day'],['tasks','Tasks'],['contacts','Contacts'],['finances','Finances'],['documents','Documents'],['post','Post-show']];
+function taskRows(list){return list.length?list.map(function(t){var s=show(t.show);return '<div class="item"><span class="grow"><span class="t">'+esc(t.title)+'</span><span class="s"><a href="#/ops/show/'+t.show+'" style="text-decoration:underline;text-underline-offset:3px">'+esc(s.city)+'</a>. '+t.cat+'. Owner: <a href="#/ops/team/'+t.owner+'" style="text-decoration:underline;text-underline-offset:3px">'+esc(team(t.owner).name)+'</a>. '+t.prio+' priority</span>'+(t.blocker&&t.status==='Blocked'?'<span class="s" style="color:var(--r)">Blocker: '+esc(t.blocker)+'</span>':'')+(t.decision&&!state.dec[t.decision]?'<a class="lnk" style="min-height:32px" href="#/ops/attention/'+t.decision+'">Waiting on Morten '+ic('right',14,2)+'</a>':'')+'</span><span class="end"><span style="color:var(--'+(overdue(t)?'r':'fg')+')">'+dueTxt(t)+'</span><label class="sr" for="s'+t.id+'">Status of '+esc(t.title)+'</label><select class="sel" id="s'+t.id+'" data-task="'+t.id+'">'+TSTAT_LIST.map(function(x){return '<option'+(x===t.status?' selected':'')+'>'+x+'</option>';}).join('')+'</select></span></div>';}).join(''):'<p class="empty">No tasks.</p>';}
+function itinerary(s){
+ var I={giza:[['Wed 30 Sep','Flight to Cairo','Booked','g','plane'],['Thu 21:30','Hotel to The Village West','Booked','g','car'],['Fri 08:30','Pick-up to Cairo airport','Booked','g','car']],
+ deadsea:[['Fri 08:30','Cairo to Amman','Booked','g','plane'],['Fri 11:40','Amman airport to the venue','Not confirmed','a','car'],['Fri','Day room','Booked','g','bed']],
+ ibiza:[['Fri evening','Amman to Ibiza',state.dec.flight?'Option '+state.dec.flight+', booking in progress':'Not booked, decision by 14:00',state.dec.flight?'a':'r','plane'],['Fri night','Ibiza airport to hotel','Booked','g','car'],['Sat','Hotel','Booked','g','bed'],['Sat afternoon','Flight home','Booked','g','plane']]};
+ if(I[s.id]){return I[s.id];}
+ var b=s.travel==='Booked'||s.travel==='Flights only',h=s.hotel==='Booked';
+ return [[fmt(add(s.date,-1)),'Outbound flight',b?'Booked':s.travel,b?'g':s.travel==='Not booked'?'a':'n','plane'],[fmt(add(s.date,-1)),'Airport to hotel',s.travel==='Booked'?'Booked':'Not booked',s.travel==='Booked'?'g':'n','car'],[fmt(add(s.date,-1))+' to '+fmt(add(s.date,1)),'Hotel',h?'Booked':s.hotel,h?'g':s.hotel==='Not booked'?'a':'n','bed'],[fmt(add(s.date,1)),'Return flight',b?'Booked':'Not booked',b?'g':'n','plane']];}
+function pShow(id,tab){
+ var s=show(id);if(!s){return crumb('#/ops/shows','Shows')+head('Show not found');}
+ tab=tab||'overview';var m=stat(s);var t=tasks().filter(function(x){return x.show===id;});var dec=DECISIONS.filter(function(d){return d.show===id;});
+ var top=crumb('#/ops/shows','Shows')+'<div class="row-h" style="align-items:flex-end;gap:20px"><div style="display:flex;flex-direction:column;gap:8px"><span class="small muted">'+fmtY(s.date)+', '+when(s.date).toLowerCase()+'</span><h1 class="h1" style="font-size:clamp(40px,7vw,64px)">'+esc(s.city)+'</h1><span class="muted">'+esc(s.venue)+(s.sample?'':', '+esc(s.country))+'. '+esc(s.type)+'. Lead: '+team(s.lead).name+'. Project owner: Célia</span></div><div style="flex:0 1 240px;min-width:200px;display:flex;flex-direction:column;gap:8px"><div class="row-h">'+stLine(s)+'<b>'+s.ready+'%</b></div><div class="bar '+m.c+'"><i style="width:'+s.ready+'%"></i></div><span class="small muted">'+(s.missing.length?'Missing: '+esc(s.missing.join(', ')):'Nothing missing')+'</span></div></div>'+
+  '<nav class="tabs" aria-label="Show sections">'+TABS.map(function(x){return '<a href="#/ops/show/'+id+'/'+x[0]+'"'+(x[0]===tab?' aria-current="page"':'')+'>'+x[1]+'</a>';}).join('')+'</nav>';
+ var b='';
+ if(tab==='overview'){var next=t.filter(function(x){return ['Completed','Validated','Not applicable'].indexOf(x.status)<0;})[0];
+  b='<div class="stack">'+(s.note?'<p style="margin:0" class="muted">'+ic('right',14,2)+' '+esc(s.note)+'</p>':'')+
+  '<div class="kv"><div><span class="k">Stage time</span><span class="v">'+(s.set||'To be confirmed')+'</span></div><div><span class="k">Local time</span><span class="v">'+s.tz+'</span></div><div><span class="k">Booking</span><span class="v">'+s.booking+'</span></div><div><span class="k">Contract</span><span class="v">'+esc(s.contract)+'</span></div><div><span class="k">Travel</span><span class="v">'+esc(s.travel)+'</span></div><div><span class="k">Hotel</span><span class="v">'+esc(s.hotel)+'</span></div><div><span class="k">Production</span><span class="v">'+esc(s.production)+'</span></div><div><span class="k">Deposit</span><span class="v">'+esc(s.deposit)+'</span></div></div>'+
+  '<section class="sec"><h2 class="h2">Next action</h2><div class="list">'+(next?taskRows([next]):'<p class="empty">Nothing left to do.</p>')+'</div><a class="lnk" href="#/ops/show/'+id+'/tasks">All tasks for this show ('+t.length+') '+ic('right',14,2)+'</a></section>'+
+  '<section class="sec"><h2 class="h2">Decisions for Morten</h2><div class="list">'+(dec.length?dec.map(function(d){var v=state.dec[d.id];return '<a class="item" href="#/ops/attention/'+d.id+'"><span class="grow"><span class="t">'+esc(d.short)+'</span><span class="s">'+(v?'Decided: '+decLabel(d,v):'Due '+decDue(d))+'</span></span><span class="chev">'+ic('right',16,2)+'</span></a>';}).join(''):'<p class="empty">None.</p>')+'</div></section>'+
+  '<section class="sec"><h2 class="h2">Team on this show</h2><div class="list">'+['ops',s.lead,'travel','production','social'].map(function(x){var p=team(x);return '<a class="item" href="#/ops/team/'+x+'"><span class="avatar" style="width:32px;height:32px;font-size:12px">'+p.name.replace(/^\[/,'').charAt(0)+'</span><span class="grow"><span class="t">'+esc(p.name)+'</span><span class="s">'+esc(p.role)+'</span></span><span class="chev">'+ic('right',16,2)+'</span></a>';}).join('')+'</div></section></div>';}
+ else if(tab==='booking'){b='<div class="stack"><div class="kv"><div><span class="k">Offer</span><span class="v">Received and accepted</span></div><div><span class="k">Agreed fee</span><span class="v">[Amount]</span></div><div><span class="k">Currency</span><span class="v">[Currency]</span></div><div><span class="k">Contract</span><span class="v">'+esc(s.contract)+'</span></div><div><span class="k">Deposit</span><span class="v" style="color:var(--'+(/Overdue/.test(s.deposit)?'r':'fg')+')">'+esc(s.deposit)+'</span></div><div><span class="k">Final payment</span><span class="v">'+fmt(add(s.date,-14))+'</span></div><div><span class="k">Cancellation terms</span><span class="v">Standard</span></div><div><span class="k">Exclusivity</span><span class="v">[Radius and dates]</span></div></div><div style="display:flex;gap:10px;flex-wrap:wrap"><a class="btn ghost" href="#/ops/doc/'+id+'-contract">Open contract</a><a class="btn ghost" href="#/ops/finances">Finances</a></div></div>';}
+ else if(tab==='travel'){b='<div class="stack"><section class="sec"><h2 class="h2">Itinerary</h2><div class="tl">'+itinerary(s).map(function(r){return '<div class="ev '+r[3]+'" style="--c:var(--'+r[3]+')"><div class="row-h"><span><span class="time">'+r[0]+'</span>'+ic(r[4],16)+' <b>'+esc(r[1])+'</b></span><span class="st '+r[3]+'">'+esc(r[2])+'</span></div></div>';}).join('')+'</div></section>'+
+  '<div class="kv"><div><span class="k">Travel party</span><span class="v">Morten, [Tour manager]</span></div><div><span class="k">Baggage</span><span class="v">2 checked, 1 cabin</span></div><div><span class="k">Seat preference</span><span class="v">Aisle, front</span></div><div><span class="k">Passport</span><span class="v">Valid, copy on file</span></div><div><span class="k">Visa</span><span class="v">[To check per country]</span></div></div>'+
+  '<div style="display:flex;gap:10px;flex-wrap:wrap"><a class="btn ghost" href="#/ops/doc/'+id+'-flights">Flight confirmation</a><a class="btn ghost" href="#/ops/doc/'+id+'-hotel">Hotel confirmation</a></div></div>';}
+ else if(tab==='production'){var pt=t.filter(function(x){return x.cat==='Production';});b='<div class="stack"><div class="kv"><div><span class="k">Status</span><span class="v" style="color:var(--'+(s.status==='blocked'?'r':'fg')+')">'+esc(s.production)+'</span></div><div><span class="k">Stage time</span><span class="v">'+(s.set||'To be confirmed')+'</span></div><div><span class="k">Set duration</span><span class="v">90 minutes</span></div><div><span class="k">Soundcheck</span><span class="v">'+(s.date===TODAY?'Not needed':'To be confirmed')+'</span></div><div><span class="k">Production contact</span><span class="v">[Name]</span></div><div><span class="k">Venue technical contact</span><span class="v">[Name]</span></div></div><section class="sec"><h2 class="h2">Open technical items</h2><div class="list">'+taskRows(pt)+'</div></section><a class="btn ghost" href="#/ops/doc/'+id+'-rider" style="align-self:flex-start">Open technical rider</a></div>';}
+ else if(tab==='marketing'){var mk=t.filter(function(x){return x.cat==='Marketing';});b='<div class="stack"><div class="kv"><div><span class="k">Status</span><span class="v">'+esc(s.marketing)+'</span></div><div><span class="k">Announcement</span><span class="v">'+(s.sample?'No public announcement':'Published')+'</span></div><div><span class="k">Required posts</span><span class="v">2 before, 1 after</span></div><div><span class="k">Content capture</span><span class="v">Last 20 minutes from the booth</span></div></div><section class="sec"><h2 class="h2">Deliverables</h2><div class="list">'+taskRows(mk)+'</div></section><a class="btn ghost" href="#/ops/doc/'+id+'-marketing" style="align-self:flex-start">Marketing assets</a></div>';}
+ else if(tab==='schedule'){if(s.status==='planning'||s.sample){b='<p class="empty">The show-day schedule is built three days before the show, on '+fmt(add(s.date,-3))+'.</p>';}else{var sc=s.id==='giza'?[['21:30','Leave the hotel'],['22:00','Arrive at The Village West'],['22:15','Meet the promoter, artist area'],['23:30','On stage'],['01:00','Set ends'],['01:30','Back at the hotel'],['08:30','Pick-up to the airport for the Dead Sea']]:[['Day before','Travel and hotel check-in'],['[Time]','Leave the hotel'],['[Time]','Arrive at the venue'],[(s.set||'[Time]'),'On stage'],['[Time]','Back at the hotel']];b='<div class="tl">'+sc.map(function(r){return '<div class="ev"><span class="time">'+r[0]+'</span>'+esc(r[1])+'</div>';}).join('')+'</div>'+(s.id==='giza'?'<p class="muted small" style="margin-top:16px">Sent to Morten Wed 30 Sep 18:00, opened 18:12.</p>':'');}}
+ else if(tab==='tasks'){b='<div class="list">'+taskRows(t)+'</div><a class="btn ghost" style="margin-top:16px" href="#/ops/tasks">All tasks</a>';}
+ else if(tab==='contacts'){var cs=[['Promoter','[Promoter name]'],['Venue production','[Name]'],['Driver','[Driver name]'],['Hotel','[Hotel name]'],['Emergency','[Local contact]']];b='<div class="list">'+cs.map(function(c){return '<div class="item"><span class="grow"><span class="t">'+c[1]+'</span><span class="s">'+c[0]+'</span></span><button type="button" class="btn ghost sm" data-toast="Calling '+c[1]+'… (prototype)">'+ic('phone',14)+'Call</button><button type="button" class="btn ghost sm" data-toast="Message to '+c[1]+' (prototype)">'+ic('msg',14)+'Message</button></div>';}).join('')+'</div>';}
+ else if(tab==='finances'){b='<div class="kv"><div><span class="k">Artist fee</span><span class="v">[Amount]</span></div><div><span class="k">Deposit</span><span class="v" style="color:var(--'+(/Overdue/.test(s.deposit)?'r':'fg')+')">'+esc(s.deposit)+'</span></div><div><span class="k">Balance due</span><span class="v">'+fmt(add(s.date,-14))+'</span></div><div><span class="k">Travel budget</span><span class="v">[Amount]</span></div><div><span class="k">Hotel budget</span><span class="v">[Amount]</span></div><div><span class="k">Expenses so far</span><span class="v">[Amount]</span></div></div><p class="muted small" style="margin-top:20px">Amounts are visible to Operations and Finance only.</p><a class="btn ghost" href="#/ops/finances">All finances</a>';}
+ else if(tab==='documents'){b='<div class="list">'+docsFor(s).map(function(d){return '<a class="item" href="#/ops/doc/'+d.id+'">'+ic('doc',20)+'<span class="grow"><span class="t">'+d.name+'</span><span class="s">'+d.type+'</span></span><span class="st '+d.c+'">'+esc(d.status)+'</span><span class="chev">'+ic('right',16,2)+'</span></a>';}).join('')+'</div>';}
+ else if(tab==='post'){var items=['Final settlement sent','Payment received','Expenses closed','Content collected','Social posts published','Team debrief done','Promoter feedback logged'];var ps=state.post[id]||{};b='<div>'+items.map(function(x,i){var on=!!ps[i];return '<button type="button" class="chk" data-post="'+id+'" data-i="'+i+'" aria-pressed="'+on+'"><span class="box">'+(on?ic('check',14,3):'')+'</span><span class="lbl2">'+x+'</span></button>';}).join('')+'</div><button type="button" class="btn ghost" style="margin-top:20px" data-toast="Show archived (prototype)">Archive show</button>';}
+ return top+b;
+}
+
+function pTasks(f){
+ f=f||state.tfilter;var all=tasks();
+ var fl=function(t){return f==='all'||(f==='mine'&&t.owner==='ops')||(f==='overdue'&&overdue(t))||(f==='morten'&&t.status==='Awaiting Morten')||t.owner===f;};
+ var list=all.filter(fl);
+ var chips=[['all','All'],['mine','Mine'],['overdue','Overdue'],['morten','Awaiting Morten'],['travel','Travel'],['production','Production'],['social','Social'],['booking','Booking'],['finance','Finance']].map(function(c){return '<a class="chip" href="#/ops/tasks/'+c[0]+'" aria-pressed="'+(f===c[0])+'">'+c[1]+'</a>';}).join('');
+ var seg='<div class="seg" role="group" aria-label="View"><button type="button" data-tview="list" aria-pressed="'+(state.tview==='list')+'">List</button><button type="button" data-tview="kanban" aria-pressed="'+(state.tview==='kanban')+'">Kanban</button></div>';
+ var body;
+ if(state.tview==='kanban'){var cols=['Not started','In progress','Waiting on external party','Awaiting Morten','Blocked','Completed'];body='<div class="kan">'+cols.map(function(c){var it=list.filter(function(t){return t.status===c||(c==='Completed'&&t.status==='Validated')||(c==='Waiting on external party'&&t.status==='Changes requested');});return '<div class="kcol"><div class="row-h"><span class="st '+TSTAT[c]+'">'+c+'</span><span class="tiny muted">'+it.length+'</span></div>'+it.map(function(t){var s=show(t.show);return '<div class="kcard"><span style="font-weight:600;font-size:14px">'+esc(t.title)+'</span><span class="tiny muted"><a href="#/ops/show/'+t.show+'" style="text-decoration:underline">'+esc(s.city)+'</a>. '+esc(team(t.owner).name)+'</span><span class="tiny" style="color:var(--'+(overdue(t)?'r':'muted')+')">'+dueTxt(t)+'</span><label class="sr" for="k'+t.id+'">Move '+esc(t.title)+'</label><select class="sel" id="k'+t.id+'" data-task="'+t.id+'">'+TSTAT_LIST.map(function(x){return '<option'+(x===t.status?' selected':'')+'>'+x+'</option>';}).join('')+'</select></div>';}).join('')+'</div>';}).join('')+'</div>';}
+ else {body='<div class="list">'+taskRows(list)+'</div>';}
+ var open=all.filter(function(t){return ['Completed','Validated','Not applicable'].indexOf(t.status)<0;}).length;
+ return head('Tasks',open+' open, '+all.filter(overdue).length+' overdue. Every task has one owner.')+'<div class="row-h" style="margin-bottom:20px"><div style="display:flex;gap:8px;flex-wrap:wrap">'+chips+'</div>'+seg+'</div>'+body;
+}
+
+function decCard(d,base){var v=state.dec[d.id];var s=show(d.show);var c=d.bucket==='Urgent today'?'r':d.bucket==='This week'?'a':'n';
+ var opts=v?'<p class="done">'+ic('check',18,2.5)+'Decided: '+esc(decLabel(d,v))+'. '+team(d.from).name.replace(/^\[|\]$/g,'')+' has been notified.</p><button type="button" class="lnk" style="background:none;border:none;padding:0;color:var(--muted);cursor:pointer" data-dec="'+d.id+'" data-v="">Undo</button>':
+  '<div class="opts">'+d.options.map(function(o){return '<button type="button" class="opt" data-dec="'+d.id+'" data-v="'+o.v+'"><b>'+esc(o.t)+'</b>'+(o.s?'<span class="small muted">'+esc(o.s)+'</span>':'')+(o.reco?'<span class="tag">Recommended</span>':'')+'</button>';}).join('')+'</div>';
+ return '<article class="dcard" id="d-'+d.id+'"><div class="row-h"><span class="st '+c+'">'+ic(c==='r'?'alert':c==='a'?'clock':'cal',14,2)+d.bucket+'</span><span class="small" style="font-weight:700;color:var(--'+(c==='r'&&!v?'r':'fg')+')">'+(v?'Decided':'By '+decDue(d).replace(/^Today/,'today'))+'</span></div>'+
+  '<div style="display:flex;flex-direction:column;gap:4px"><h2 class="h3" style="font-size:18px">'+esc(d.title)+'</h2><a href="'+base+'show/'+d.show+'" class="small muted" style="text-decoration:underline;text-underline-offset:3px;align-self:flex-start">'+esc(s.city)+', '+esc(s.venue)+', '+fmt(s.date)+'</a></div>'+
+  '<p style="margin:0">'+esc(d.why)+'</p><p style="margin:0" class="small muted">Impact: '+esc(d.impact)+'</p>'+
+  (d.id==='artwork'?'<a href="'+(base==='#/m/'?'#/m/doc/':'#/ops/doc/')+'shanghai-marketing" style="height:150px;border:1px dashed var(--line);border-radius:6px;display:flex;align-items:center;justify-content:center" class="muted small">[Key visual preview] Open</a>':'')+
+  (v?'':'<div class="reco"><span class="tiny muted" style="font-weight:700">Recommended by '+esc(d.recoBy)+'</span><span style="font-weight:600">'+esc(d.reco)+'</span></div>')+opts+
+  '<span class="tiny muted">Requested by '+esc(team(d.from).name)+'</span></article>';}
+
+function pAttention(id){
+ var p=pending();var done=DECISIONS.filter(function(d){return state.dec[d.id];});
+ var b=['Urgent today','This week','Upcoming'].map(function(bk){var l=p.filter(function(d){return d.bucket===bk;});return l.length?'<section class="sec"><h2 class="h2">'+bk+'</h2>'+l.map(function(d){return decCard(d,'#/ops/');}).join('')+'</section>':'';}).join('');
+ var fy='<section class="sec"><h2 class="h2">For information</h2><div class="list">'+FYI.map(function(f){return '<a class="item" href="'+f.href+'"><span class="grow"><span class="t">'+esc(f.t)+'</span><span class="s">'+esc(f.s)+'</span></span><span class="chev">'+ic('right',16,2)+'</span></a>';}).join('')+'</div></section>';
+ var cp='<section class="sec" id="completed"><h2 class="h2">Completed decisions</h2><div class="list">'+done.map(function(d){return '<a class="item" href="#/ops/show/'+d.show+'"><span class="grow"><span class="t">'+esc(d.short)+'</span><span class="s">Today, by Morten</span></span><span class="st g">'+ic('check',14,2)+esc(decLabel(d,state.dec[d.id]))+'</span></a>';}).join('')+COMPLETED.map(function(c){return '<div class="item"><span class="grow"><span class="t">'+esc(c.t)+'</span><span class="s">'+c.d+'</span></span><span class="st g">'+ic('check',14,2)+c.r+'</span></div>';}).join('')+'</div></section>';
+ return head('Morten\'s attention','Only what needs his input. '+p.length+' waiting.','<a class="btn ghost" href="#/m">Open Morten view</a>')+'<div class="stack" style="max-width:760px">'+(b||'<p class="empty">Nothing waiting for Morten.</p>')+fy+cp+'</div>';
+}
+
+function pCalendar(){
+ var f=state.cal;var ev={};function addE(d,o){(ev[d]=ev[d]||[]).push(o);}
+ upcoming().forEach(function(s){addE(s.date,{k:'show',c:STAT[s.status][1],t:s.city,h:'#/ops/show/'+s.id});});
+ [['2026-09-30','Fly to Cairo','giza'],['2026-10-02','Cairo to Amman','deadsea'],['2026-10-02','Amman to Ibiza','ibiza'],['2026-10-03','Flight home','ibiza'],['2026-10-09','Fly to Dubai','dubai'],['2026-10-11','Flight home','dubai'],['2026-10-14','Fly to Jakarta','jakarta'],['2026-10-16','Jakarta to Seoul','seoul'],['2026-10-17','Seoul to Shanghai','shanghai'],['2026-10-18','Flight home','shanghai'],['2026-10-21','Fly to Amsterdam','amsterdam'],['2026-10-23','Amsterdam to Montmorot','montmorot'],['2026-10-29','Fly to Los Angeles','sanbernardino']].forEach(function(x){addE(x[0],{k:'travel',c:'n',t:x[1],h:'#/ops/show/'+x[2]+'/travel'});});
+ pending().forEach(function(d){addE(d.due,{k:'deadline',c:'b',t:'Decision: '+d.short,h:'#/ops/attention/'+d.id});});
+ tasks().forEach(function(t){if(t.due>=TODAY&&t.status!=='Completed'&&!t.decision){addE(t.due,{k:'deadline',c:'a',t:t.title,h:'#/ops/show/'+t.show+'/tasks'});}});
+ addE('2026-10-05',{k:'meeting',c:'n',t:'Weekly check-in 11:00',h:'#/ops/attention'});addE('2026-10-06',{k:'meeting',c:'n',t:'Studio session',h:'#/ops/calendar'});addE('2026-10-12',{k:'meeting',c:'n',t:'Weekly check-in 11:00',h:'#/ops/attention'});addE('2026-10-19',{k:'meeting',c:'n',t:'Weekly check-in 11:00',h:'#/ops/attention'});
+ var keep=function(e){return f==='all'||e.k===f;};
+ var chips=[['all','All'],['show','Shows'],['travel','Travel'],['deadline','Deadlines'],['meeting','Meetings']].map(function(c){return '<button type="button" class="chip" data-cal="'+c[0]+'" aria-pressed="'+(f===c[0])+'">'+c[1]+'</button>';}).join('');
+ var g='<div class="cal">'+['Mon','Tue','Wed','Thu','Fri','Sat','Sun'].map(function(w){return '<span class="wd">'+w+'</span>';}).join('');
+ for(var i=0;i<35;i++){var d=add('2026-09-28',i);var es=(ev[d]||[]).filter(keep);g+='<div class="d'+(d===TODAY?' today':'')+(d.slice(5,7)!=='10'?' out':'')+'"><span class="num">'+pd(d).getUTCDate()+'</span>'+es.slice(0,3).map(function(e){return '<a class="ev2 '+e.c+'" href="'+e.h+'" title="'+esc(e.t)+'">'+esc(e.t)+'</a>';}).join('')+(es.length>3?'<span class="tiny muted">+'+(es.length-3)+' more</span>':'')+'</div>';}
+ g+='</div>';
+ var ag='';for(var j=0;j<14;j++){var dd=add(TODAY,j);var es2=(ev[dd]||[]).filter(keep);if(es2.length){ag+='<div class="item" style="align-items:flex-start"><span style="width:64px;flex-shrink:0"><b style="font-stretch:125%;font-size:20px">'+pd(dd).getUTCDate()+'</b><br><span class="tiny muted">'+(dd===TODAY?'Today':WD[pd(dd).getUTCDay()])+'</span></span><span class="grow" style="gap:8px">'+es2.map(function(e){return '<a href="'+e.h+'" style="display:flex;gap:8px;align-items:center"><span class="kdot '+e.c+'" style="width:8px;height:8px;border-radius:50%;background:var(--'+e.c+')"></span><span>'+esc(e.t)+'</span><span class="tiny muted">'+e.k+'</span></a>';}).join('')+'</span></div>';}}
+ return head('Calendar','October 2026. Shows, travel, deadlines and meetings in one place. Times in local time; Morten\'s home time is shown on each show.')+'<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px">'+chips+'</div>'+g+'<section class="sec" style="margin-top:36px"><h2 class="h2">Next 14 days</h2><div class="list">'+(ag||'<p class="empty">Nothing in this category.</p>')+'</div></section>';
+}
+
+function pTeam(id){
+ var all=tasks();
+ if(id){var p=team(id);var l=all.filter(function(t){return t.owner===id;});return crumb('#/ops/team','Team')+head(esc(p.name),esc(p.role)+'. '+l.filter(function(t){return t.status!=='Completed';}).length+' open tasks, '+l.filter(overdue).length+' overdue.','<button type="button" class="btn ghost" data-toast="Message to '+esc(p.name)+' (prototype)">'+ic('msg',16)+'Message</button>')+'<div class="list">'+taskRows(l)+'</div>';}
+ return head('Team','Who owns what. Every task has one owner.')+'<div class="tw"><table class="tbl"><thead><tr><th>Person</th><th>Role</th><th>Open</th><th>Overdue</th><th>Blocked</th><th>Waiting on Morten</th><th>Next deadline</th></tr></thead><tbody>'+TEAM.map(function(p){var l=all.filter(function(t){return t.owner===p.id&&['Completed','Validated','Not applicable'].indexOf(t.status)<0;});var nx=l.slice().sort(function(a,b){return a.due<b.due?-1:1;})[0];return '<tr data-href="#/ops/team/'+p.id+'"><td><a href="#/ops/team/'+p.id+'" style="font-weight:700">'+esc(p.name)+'</a></td><td class="muted">'+esc(p.role)+'</td><td>'+l.length+'</td><td style="color:var(--'+(l.filter(overdue).length?'r':'fg')+')">'+l.filter(overdue).length+'</td><td>'+l.filter(function(t){return t.status==='Blocked';}).length+'</td><td>'+l.filter(function(t){return t.status==='Awaiting Morten';}).length+'</td><td>'+(nx?dueTxt(nx):'None')+'</td></tr>';}).join('')+'</tbody></table></div>';
+}
+
+function pDocs(){var d=allDocs();return head('Documents',d.length+' documents across '+upcoming().length+' shows.')+'<div class="tw"><table class="tbl"><thead><tr><th>Document</th><th>Show</th><th>Type</th><th>Status</th></tr></thead><tbody>'+d.map(function(x){var s=show(x.show);return '<tr data-href="#/ops/doc/'+x.id+'"><td><a href="#/ops/doc/'+x.id+'" style="font-weight:600;display:inline-flex;gap:8px;align-items:center">'+ic('doc',16)+x.name+'</a></td><td>'+esc(s.city)+'</td><td class="muted">'+x.type+'</td><td><span class="st '+x.c+'">'+esc(x.status)+'</span></td></tr>';}).join('')+'</tbody></table></div>';}
+function pDoc(id,base){var sid=id.split('-')[0];var s=show(sid);if(!s){return head('Document not found');}var d=docsFor(s).filter(function(x){return x.id===id;})[0];if(!d){return head('Document not found');}
+ return crumb(base==='#/m/'?'#/m':'#/ops/show/'+sid+'/documents',base==='#/m/'?'Today':s.city)+head(d.name,esc(s.city)+', '+fmt(s.date)+'. '+d.type+'. Status: '+esc(d.status)+'.')+'<div class="panel" style="min-height:280px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;border-style:dashed">'+ic('doc',36,1.25)+'<span class="muted">['+d.name+' preview]</span><span class="tiny muted">Version 2, uploaded Mon 28 Sep by '+team(s.lead).name+'</span></div><div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px"><button type="button" class="btn ghost" data-toast="Download started (prototype)">Download</button><button type="button" class="btn ghost" data-toast="Version history (prototype)">Version history</button>'+(base==='#/m/'?'':'<a class="btn ghost" href="#/ops/show/'+sid+'/tasks">Linked tasks</a>')+'</div>';}
+
+function pFinances(){var up=upcoming();return head('Finances','Artist fees and deposits. Amounts are visible to Operations and Finance only.')+'<div class="tw"><table class="tbl"><thead><tr><th>Show</th><th>Date</th><th>Fee</th><th>Deposit</th><th>Balance due</th><th>Contract</th></tr></thead><tbody>'+up.map(function(s){var od=/Overdue/.test(s.deposit);return '<tr data-href="#/ops/show/'+s.id+'/finances"><td><a href="#/ops/show/'+s.id+'/finances" style="font-weight:700">'+esc(s.city)+'</a>'+(s.sample?'<div class="tiny muted">'+esc(s.type)+'</div>':'')+'</td><td style="white-space:nowrap">'+fmtY(s.date)+'</td><td class="muted">[Amount]</td><td><span class="st '+(od?'r':s.deposit==='Received'?'g':'n')+'">'+(od?ic('alert',14,2):'')+esc(s.deposit)+'</span></td><td style="white-space:nowrap">'+fmt(add(s.date,-14))+'</td><td>'+esc(s.contract)+'</td></tr>';}).join('')+'</tbody></table></div>';}
+
+function pContacts(){var rows=TEAM.map(function(p){return {n:p.name,r:p.role,h:'#/ops/team/'+p.id};});upcoming().slice(0,6).forEach(function(s){rows.push({n:'[Promoter name]',r:'Promoter, '+s.city,h:'#/ops/show/'+s.id+'/contacts'});});
+ return head('Contacts','Internal team and external partners. Names in brackets are placeholders.')+'<div class="list">'+rows.map(function(c){return '<div class="item"><span class="grow"><a class="t" href="'+c.h+'">'+esc(c.n)+'</a><span class="s">'+esc(c.r)+'</span></span><button type="button" class="btn ghost sm" data-toast="Calling '+esc(c.n)+'… (prototype)">'+ic('phone',14)+'<span class="sr">Call</span></button><button type="button" class="btn ghost sm" data-toast="Message to '+esc(c.n)+' (prototype)">'+ic('msg',14)+'<span class="sr">Message</span></button></div>';}).join('')+'</div>';}
+
+function pReports(){var up=upcoming().slice(0,11),all=tasks();
+ var r1='<section class="sec"><h2 class="h2">Readiness by show</h2><div class="list">'+up.map(function(s){var m=stat(s);return '<a class="item" href="#/ops/show/'+s.id+'"><span style="width:140px;flex-shrink:0;font-weight:600">'+esc(s.city)+'</span><span class="grow"><span class="bar '+m.c+'"><i style="width:'+s.ready+'%"></i></span></span><span style="width:48px;text-align:right;font-weight:700">'+s.ready+'%</span></a>';}).join('')+'</div></section>';
+ var r2='<section class="sec"><h2 class="h2">Open and overdue tasks by owner</h2><div class="list">'+TEAM.map(function(p){var l=all.filter(function(t){return t.owner===p.id&&t.status!=='Completed';});return '<a class="item" href="#/ops/team/'+p.id+'"><span class="grow"><span class="t">'+esc(p.name)+'</span></span><span class="end">'+l.length+' open<span style="color:var(--'+(l.filter(overdue).length?'r':'muted')+')">'+l.filter(overdue).length+' overdue</span></span></a>';}).join('')+'</div></section>';
+ var r3='<section class="sec"><h2 class="h2">Decisions escalated to Morten</h2><div class="kv"><div><span class="k">Waiting</span><span class="v">'+pending().length+'</span></div><div><span class="k">Decided this week</span><span class="v">'+(COMPLETED.length+DECISIONS.length-pending().length)+'</span></div><div><span class="k">Routine requests sent to him</span><span class="v">0</span></div></div></section>';
+ return head('Reports','Computed from the current shows, tasks and decisions.')+'<div class="stack">'+r3+r1+r2+'</div>';}
+
+function pSettings(){var s=state.set;var t=function(k,label,sub){return '<button type="button" class="chk" data-set="'+k+'" aria-pressed="'+s[k]+'"><span class="box">'+(s[k]?ic('check',14,3):'')+'</span><span class="grow" style="display:flex;flex-direction:column"><span>'+label+'</span><span class="small muted">'+sub+'</span></span></button>';};
+ return head('Settings','Notifications and access.')+'<div class="stack" style="max-width:720px"><section class="sec"><h2 class="h2">What Morten receives</h2><div>'+t('decisions','Important decisions','Flight options, approvals, contracts')+t('changes','Major schedule changes','Set time or date changes')+t('blockers','Urgent blockers','Anything that puts a show at risk')+t('showday','Show-day information','The brief, the day before each show')+t('routine','Routine operational updates','Kept off: Morten never gets operational noise')+'</div></section><section class="sec"><h2 class="h2">Team digests</h2><div>'+t('digest','Daily digest at 08:00','Overdue, blocked and due today')+t('weekly','Weekly operations report, Mondays','Readiness, decisions, workload')+'</div></section><section class="sec"><h2 class="h2">Channels</h2><div class="list"><div class="item"><span class="grow"><span class="t">In-app notifications</span></span><span class="st g">On</span></div><div class="item"><span class="grow"><span class="t">Email</span><span class="s">Integration placeholder</span></span><button type="button" class="btn ghost sm" data-toast="Email integration not connected in this prototype">Connect</button></div><div class="item"><span class="grow"><span class="t">WhatsApp</span><span class="s">Integration placeholder</span></span><button type="button" class="btn ghost sm" data-toast="WhatsApp integration not connected in this prototype">Connect</button></div></div></section></div>';}
+
+function pNotifs(){return head('Notifications','')+'<div class="list" style="max-width:760px">'+NOTIFS.map(function(n){return '<a class="item" href="'+n.h+'">'+(n.u?'<span class="kdot r" style="width:8px;height:8px;border-radius:50%;background:var(--r)"></span>':'<span style="width:8px"></span>')+'<span class="grow"><span class="t">'+esc(n.t)+'</span><span class="s">'+esc(n.s)+'</span></span><span class="chev">'+ic('right',16,2)+'</span></a>';}).join('')+'</div>';}
+
+function pMore(){var it=[['#/ops/calendar','cal','Calendar'],['#/ops/attention','flag',"Morten's attention"],['#/ops/team','team','Team'],['#/ops/documents','doc','Documents'],['#/ops/finances','money','Finances'],['#/ops/contacts','contacts','Contacts'],['#/ops/reports','reports','Reports'],['#/ops/notifications','bell','Notifications'],['#/ops/settings','settings','Settings'],['#/ops/new','plus','Create new show']];
+ return head('More','')+'<div class="list">'+it.map(function(x){return '<a class="item" href="'+x[0]+'">'+ic(x[1],20)+'<span class="grow"><span class="t">'+x[2]+'</span></span><span class="chev">'+ic('right',16,2)+'</span></a>';}).join('')+'</div>';}
+
+function pNew(){var w=state.wiz;var steps=['Event','Booking and team','Review'];
+ var st='<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px">'+steps.map(function(x,i){return '<span class="chip" aria-pressed="'+(w.step===i+1)+'" style="cursor:default">'+(i+1)+'. '+x+'</span>';}).join('')+'</div>';
+ var f=function(k,l,type,ph){return '<label class="fld">'+l+'<input class="in" type="'+(type||'text')+'" data-wiz="'+k+'" value="'+esc(w[k])+'" placeholder="'+(ph||'')+'"></label>';};
+ var sel=function(k,l,opts){return '<label class="fld">'+l+'<select class="in" data-wiz="'+k+'">'+opts.map(function(o){var v=o[0]||o,lab=o[1]||o;return '<option value="'+esc(v)+'"'+(w[k]===v?' selected':'')+'>'+esc(lab)+'</option>';}).join('')+'</select></label>';};
+ var b;
+ if(w.step===1){b='<div class="kv" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">'+f('city','City','text','e.g. Berlin')+f('country','Country','text','e.g. Germany')+f('venue','Venue or festival')+f('date','Date','date')+sel('type','Event type',['Club show','Festival','Arena show','Private event','Brand event'])+'</div>';}
+ else if(w.step===2){b='<div class="kv" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">'+sel('lead','Booking lead',[['booking','Booking Global'],['bookingus','Booking US']])+sel('template','Start from',['Standard show','Festival template','Club show template','Private event template','Blank project'])+'</div><p class="muted small" style="margin-top:16px">The template creates the standard tasks (contract, deposit, flights, hotel, tech rider, content plan) with owners and deadlines.</p>';}
+ else {b='<div class="kv"><div><span class="k">City</span><span class="v">'+(esc(w.city)||'[City]')+'</span></div><div><span class="k">Venue</span><span class="v">'+(esc(w.venue)||'[Venue]')+'</span></div><div><span class="k">Date</span><span class="v">'+(w.date?fmtY(w.date):'[Date]')+'</span></div><div><span class="k">Type</span><span class="v">'+esc(w.type)+'</span></div><div><span class="k">Lead</span><span class="v">'+team(w.lead).name+'</span></div><div><span class="k">Template</span><span class="v">'+esc(w.template)+'</span></div></div>';}
+ var nav='<div style="display:flex;gap:10px;margin-top:28px">'+(w.step>1?'<button type="button" class="btn ghost" data-wizgo="back">Back</button>':'<a class="btn ghost" href="#/ops/shows">Cancel</a>')+(w.step<3?'<button type="button" class="btn" data-wizgo="next">Continue</button>':'<button type="button" class="btn" data-wizgo="create">Create show</button>')+'</div>';
+ return crumb('#/ops/shows','Shows')+head('New show','Three steps. Everything can be edited later.')+'<div style="max-width:760px">'+st+b+nav+'</div>';}
+
+/* ================= MORTEN PAGES ================= */
+function mToday(){var n=upcoming()[0];var p=pending();
+ var t='<section class="tonight" aria-label="Next show"><div class="row-h"><b>Tonight</b><span style="display:inline-flex;gap:6px;align-items:center;font-weight:700;color:#15803d">'+ic('check',16,2.5)+'Ready</span></div><div style="display:flex;flex-direction:column;gap:6px"><span class="disp city">'+esc(n.city)+'</span><span class="sub">'+esc(n.venue)+', '+esc(n.country)+'</span></div><div class="grid3"><div><span class="tiny sub">Pick-up</span><b style="font-size:19px">21:30</b></div><div><span class="tiny sub">On stage</span><b style="font-size:19px">23:30</b></div><div><span class="tiny sub">Local time</span><b style="font-size:19px">'+n.tz+'</b></div></div><span class="small sub">Tomorrow: <a href="#/m/show/deadsea" style="text-decoration:underline">the Dead Sea</a>, then <a href="#/m/show/ibiza" style="text-decoration:underline">Ibiza</a>.</span><a class="btn full" href="#/m/schedule">Tonight\'s schedule</a></section>';
+ var first=p[0];
+ var dd='<section class="sec"><div class="row-h"><h1 class="h2">Waiting for you</h1><a class="small muted" href="#/m/decisions" style="text-decoration:underline">'+p.length+' decision'+(p.length===1?'':'s')+'</a></div>'+
+  (first?mDecShort(first,true):'<p class="empty">Nothing waiting. Enjoy the show.</p>')+
+  '<div class="list">'+p.slice(1).map(function(d){return '<a class="item" href="#/m/decision/'+d.id+'"><span class="grow"><span class="t">'+esc(d.short)+'</span><span class="s">Recommended: '+esc(d.options.filter(function(o){return o.reco;})[0].t.toLowerCase())+'. By '+decDue(d)+'</span></span><span class="chev">'+ic('right',16,2)+'</span></a>';}).join('')+'</div><a class="small muted" href="#/m/decisions#completed" style="text-decoration:underline;min-height:44px;display:inline-flex;align-items:center">Completed decisions</a></section>';
+ return t+dd;}
+function mDecShort(d,urgent){var s=show(d.show);var r=d.options.filter(function(o){return o.reco;})[0];
+ return '<article class="dcard"><div class="row-h"><span class="st '+(d.bucket==='Urgent today'?'r':'a')+'">'+ic(d.bucket==='Urgent today'?'alert':'clock',14,2)+d.bucket+'</span><b class="small" style="color:var(--'+(d.bucket==='Urgent today'?'r':'fg')+')">By '+decDue(d).replace(/^Today /,'')+'</b></div><div style="display:flex;flex-direction:column;gap:4px"><h2 class="h3" style="font-size:18px">'+esc(d.title)+'</h2><a class="small muted" href="#/m/show/'+s.id+'" style="text-decoration:underline;align-self:flex-start">'+esc(s.city)+', '+esc(s.venue)+', '+fmt(s.date)+'</a></div><p style="margin:0">'+esc(d.why)+'</p><div class="reco"><span class="tiny muted" style="font-weight:700">Recommended by '+esc(d.recoBy)+'</span><span style="font-weight:600">'+esc(d.reco)+'</span></div><div class="opts"><button type="button" class="btn" data-dec="'+d.id+'" data-v="'+r.v+'">Approve '+(r.v.length===1?r.v:'')+'</button><a class="btn ghost" href="#/m/decision/'+d.id+'">See options</a></div></article>';}
+function mDecisions(){var p=pending();var b=['Urgent today','This week','Upcoming'].map(function(bk){var l=p.filter(function(d){return d.bucket===bk;});return l.length?'<section class="sec"><h2 class="h2">'+bk+'</h2><div class="list">'+l.map(function(d){return '<a class="item" href="#/m/decision/'+d.id+'"><span class="grow"><span class="t">'+esc(d.short)+'</span><span class="s">'+esc(show(d.show).city)+'. By '+decDue(d)+'</span></span><span class="chev">'+ic('right',16,2)+'</span></a>';}).join('')+'</div></section>':'';}).join('');
+ var done=DECISIONS.filter(function(d){return state.dec[d.id];});
+ return '<h1 class="h1">Decisions</h1>'+(b||'<p class="empty">Nothing waiting for you.</p>')+'<section class="sec"><h2 class="h2">For information</h2><div class="list">'+FYI.map(function(f){return '<div class="item"><span class="grow"><span class="t">'+esc(f.t)+'</span><span class="s">'+esc(f.s)+'</span></span></div>';}).join('')+'</div></section><section class="sec" id="completed"><h2 class="h2">Completed</h2><div class="list">'+done.map(function(d){return '<a class="item" href="#/m/decision/'+d.id+'"><span class="grow"><span class="t">'+esc(d.short)+'</span><span class="s">Today</span></span><span class="st g">'+ic('check',14,2)+esc(decLabel(d,state.dec[d.id]))+'</span></a>';}).join('')+COMPLETED.map(function(c){return '<div class="item"><span class="grow"><span class="t">'+esc(c.t)+'</span><span class="s">'+c.d+'</span></span><span class="st g">'+ic('check',14,2)+c.r+'</span></div>';}).join('')+'</div></section>';}
+function mDecision(id){var d=decision(id);if(!d){return '<h1 class="h1">Not found</h1>';}return crumb('#/m/decisions','Decisions')+decCard(d,'#/m/');}
+function mSchedule(){var sc=[['21:30','Pick-up at the hotel','[Driver name]'],['22:00','Arrive at The Village West','Artist entrance'],['23:30','On stage','90 minutes'],['01:00','Set ends',''],['01:30','Back at the hotel',''],['08:30','Pick-up for the airport','Flight to Amman']];
+ return crumb('#/m','Today')+'<div><span class="small muted">Tonight, Thu 1 Oct</span><h1 class="h1" style="font-size:56px;margin-top:6px">Giza</h1><span class="muted">The Village West, Egypt</span></div><section class="sec"><h2 class="h2">Schedule</h2><div class="tl">'+sc.map(function(r,i){return '<div class="ev"'+(i===2?' style="--c:var(--g)"':'')+'><span class="time">'+r[0]+'</span><b>'+esc(r[1])+'</b>'+(r[2]?'<div class="small muted" style="margin-left:0">'+esc(r[2])+'</div>':'')+'</div>';}).join('')+'</div></section><section class="sec"><h2 class="h2">Tomorrow</h2><div class="list"><a class="item" href="#/m/show/deadsea"><span class="grow"><span class="t">Dead Sea</span><span class="s">Panorama Dead Sea, Jordan</span></span><span class="chev">'+ic('right',16,2)+'</span></a><a class="item" href="#/m/show/ibiza"><span class="grow"><span class="t">Ibiza</span><span class="s">UNVRS, late night</span></span><span class="chev">'+ic('right',16,2)+'</span></a></div></section>';}
+function mShows(){return '<h1 class="h1">Shows</h1><div class="list">'+upcoming().map(function(s){return '<a class="item" href="#/m/show/'+s.id+'"><span style="width:44px;font-stretch:125%;font-weight:800;font-size:20px">'+String(pd(s.date).getUTCDate()).padStart(2,'0')+'<span class="tiny muted" style="display:block;font-weight:500">'+MO[pd(s.date).getUTCMonth()]+'</span></span><span class="grow"><span class="t disp" style="font-size:19px">'+esc(s.city)+'</span><span class="s">'+esc(s.venue)+'</span></span>'+stLine(s)+'</a>';}).join('')+'</div>';}
+function mShow(id){var s=show(id);if(!s){return '<h1 class="h1">Not found</h1>';}var dec=pending().filter(function(d){return d.show===id;});
+ return crumb('#/m/shows','Shows')+'<div><span class="small muted">'+fmtY(s.date)+'</span><h1 class="h1" style="font-size:52px;margin:6px 0">'+esc(s.city)+'</h1><span class="muted">'+esc(s.venue)+(s.sample?'':', '+esc(s.country))+'</span><div style="margin-top:10px">'+stLine(s)+'</div></div>'+
+ (dec.length?'<section class="sec"><h2 class="h2">Needs you</h2>'+dec.map(function(d){return mDecShort(d);}).join('')+'</section>':'<p class="muted" style="margin:0">Nothing needs you for this show. The team is on it.</p>')+
+ '<div class="kv"><div><span class="k">On stage</span><span class="v">'+(s.set||'To be confirmed')+'</span></div><div><span class="k">Local time</span><span class="v">'+s.tz+'</span></div><div><span class="k">Travel</span><span class="v">'+esc(s.travel)+'</span></div><div><span class="k">Hotel</span><span class="v">'+esc(s.hotel)+'</span></div></div>';}
+function mContacts(){var c=[['Célia','Operations, your first call for anything'],['[Driver name]','Driver tonight in Giza'],['[Promoter name]','Promoter tonight in Giza'],['Booking Global','Booking, rest of world'],['Booking US','Booking, US and South America']];
+ return '<h1 class="h1">Contacts</h1><div class="list">'+c.map(function(x){return '<div class="item"><span class="grow"><span class="t">'+x[0]+'</span><span class="s">'+x[1]+'</span></span><button type="button" class="btn ghost sm" data-toast="Calling '+x[0]+'… (prototype)">'+ic('phone',14)+'<span class="sr">Call '+x[0]+'</span></button><button type="button" class="btn ghost sm" data-toast="Message to '+x[0]+' (prototype)">'+ic('msg',14)+'<span class="sr">Message '+x[0]+'</span></button></div>';}).join('')+'</div>';}
+
+/* ================= shells ================= */
+var NAV=[['dashboard','#/ops','grid','Dashboard'],['calendar','#/ops/calendar','cal','Calendar'],['shows','#/ops/shows','ticket','Shows'],['tasks','#/ops/tasks','tasks','My tasks'],['attention','#/ops/attention','flag',"Morten's attention"],['team','#/ops/team','team','Team'],['documents','#/ops/documents','doc','Documents'],['finances','#/ops/finances','money','Finances'],['contacts','#/ops/contacts','contacts','Contacts'],['reports','#/ops/reports','reports','Reports'],['settings','#/ops/settings','settings','Settings']];
+function toggle(cur){return '<div class="seg" role="group" aria-label="View"><a href="#/ops"'+(cur==='ops'?' aria-current="page"':'')+'>Operations</a><a href="#/m"'+(cur==='m'?' aria-current="page"':'')+'>Morten</a></div>';}
+function opsShell(page,active){var p=pending().length,mine=tasks().filter(function(t){return t.owner==='ops'&&t.status!=='Completed';}).length;
+ var side='<aside class="side"><a class="wm" href="#/ops"><b>Morten</b><span>360</span></a>'+toggle('ops')+'<nav class="snav" aria-label="Sections">'+NAV.map(function(n){var extra=n[0]==='attention'&&p?'<span class="badge">'+p+'</span>':n[0]==='tasks'?'<span class="cnt">'+mine+'</span>':'';return '<a href="'+n[1]+'"'+(n[0]===active?' aria-current="page"':'')+'>'+ic(n[2])+'<span>'+n[3]+'</span>'+extra+'</a>';}).join('')+'</nav><div class="me"><span class="avatar">C</span><span style="display:flex;flex-direction:column"><b style="font-size:14px">Célia</b><span class="tiny muted">Operations Manager</span></span></div></aside>';
+ var mtop='<div class="mtop"><a class="wm" href="#/ops" style="font-size:18px"><b>Morten</b><span>360</span></a>'+toggle('ops')+'</div>';
+ var hd='<header class="head"><div class="search"><label>'+ic('search')+'<span class="sr">Search</span><input id="q" type="search" placeholder="Search shows, tasks, contacts, documents" autocomplete="off"></label><div class="results" id="results"></div></div><span class="spacer"></span><a class="iconbtn" href="#/ops/notifications" aria-label="Notifications, 3 new">'+ic('bell',20)+'<span class="dot" aria-hidden="true"></span></a><a class="btn" href="#/ops/new" aria-label="Create new show">'+ic('plus',18,2)+'<span class="lbl">Create new show</span></a></header>';
+ var mt=[['dashboard','#/ops','grid','Dashboard'],['shows','#/ops/shows','ticket','Shows'],['tasks','#/ops/tasks','tasks','Tasks'],['attention','#/ops/attention','flag','Morten'],['more','#/ops/more','menu','More']];
+ var mtab='<nav class="mtab" aria-label="Main">'+mt.map(function(n){var on=n[0]===active||(n[0]==='more'&&['calendar','team','documents','finances','contacts','reports','settings','notifications','new','more'].indexOf(active)>-1);return '<a href="'+n[1]+'"'+(on?' aria-current="page"':'')+'><span class="ico">'+ic(n[2],22)+(n[0]==='attention'&&p?'<span class="badge">'+p+'</span>':'')+'</span><span>'+n[3]+'</span></a>';}).join('')+'</nav>';
+ return '<div class="ops">'+side+'<div class="col">'+mtop+hd+'<main id="main" class="opsmain" tabindex="-1">'+page+'</main>'+mtab+'</div></div>';}
+function mShell(page,active){var p=pending().length;var mt=[['today','#/m','home','Today'],['decisions','#/m/decisions','flag','Decisions'],['schedule','#/m/schedule','cal','Schedule'],['shows','#/m/shows','ticket','Shows'],['contacts','#/m/contacts','phone','Contacts']];
+ return '<div class="mv"><header class="mh"><a class="wm" href="#/m"><b>Morten</b><span>360</span></a>'+toggle('m')+'</header><main id="main" tabindex="-1"><span class="small muted" style="margin-bottom:-16px">Thursday 1 October</span>'+page+'</main><nav class="mtab" aria-label="Main">'+mt.map(function(n){return '<a href="'+n[1]+'"'+(n[0]===active?' aria-current="page"':'')+'><span class="ico">'+ic(n[2],22)+(n[0]==='decisions'&&p?'<span class="badge">'+p+'</span>':'')+'</span><span>'+n[3]+'</span></a>';}).join('')+'</nav></div>';}
+
+/* ================= router ================= */
+function route(){var h=(location.hash||'#/ops').replace(/^#\/?/,'');var a=h.split('/').filter(Boolean);if(!a.length){a=['ops'];}return a;}
+function render(nav){
+ var a=route(),html,title='MORTEN360';
+ if(a[0]==='m'){
+  var s=a[1]||'today',pg;
+  if(s==='decisions'){pg=mDecisions();}else if(s==='decision'){pg=mDecision(a[2]);s='decisions';}else if(s==='schedule'){pg=mSchedule();}else if(s==='shows'){pg=mShows();}else if(s==='show'){pg=mShow(a[2]);s='shows';}else if(s==='contacts'){pg=mContacts();}else if(s==='doc'){pg=pDoc(a[2],'#/m/');s='today';}else{s='today';pg=mToday();}
+  html=mShell(pg,s);title+=' | Morten';
+ } else {
+  var p=a[1]||'dashboard',page,act=p;
+  switch(p){
+   case 'shows':page=pShows(a[2]);if(a[2]){state.filter=a[2];}break;
+   case 'show':page=pShow(a[2],a[3]);act='shows';break;
+   case 'tasks':if(a[2]){state.tfilter=a[2];}else{state.tfilter='all';}page=pTasks(state.tfilter);break;
+   case 'attention':page=pAttention(a[2]);break;
+   case 'calendar':page=pCalendar();break;
+   case 'team':page=pTeam(a[2]);break;
+   case 'documents':page=pDocs();break;
+   case 'doc':page=pDoc(a[2],'#/ops/');act='documents';break;
+   case 'finances':page=pFinances();break;
+   case 'contacts':page=pContacts();break;
+   case 'reports':page=pReports();break;
+   case 'settings':page=pSettings();break;
+   case 'notifications':page=pNotifs();break;
+   case 'more':page=pMore();break;
+   case 'new':page=pNew();break;
+   default:act='dashboard';page=pDashboard();
+  }
+  if(p==='shows'&&!a[2]){state.filter='all';page=pShows('all');}
+  html=opsShell(page,act);
+ }
+ document.getElementById('app').innerHTML=html;document.title=title;
+ if(nav){var anchor=null;if(a[0]==='ops'&&a[1]==='attention'&&a[2]){anchor=document.getElementById('d-'+a[2]);}if(location.hash.indexOf('#completed')>-1){anchor=document.getElementById('completed');}if(anchor&&anchor.scrollIntoView){anchor.scrollIntoView();}else{window.scrollTo(0,0);}var m=document.getElementById('main');if(m&&m.focus){try{m.focus({preventScroll:true});}catch(e){}}}
+}
+function rerender(){var y=window.scrollY||0;render(false);window.scrollTo(0,y);}
+var tt=null;function toast(msg){var t=document.getElementById('toast');t.textContent=msg;t.className='on';clearTimeout(tt);tt=setTimeout(function(){t.className='';},2600);}
+
+/* ================= events ================= */
+document.addEventListener('click',function(e){
+ var el=e.target.closest?e.target.closest('[data-dec],[data-toast],[data-view],[data-tview],[data-cal],[data-post],[data-set],[data-wizgo],tr[data-href]'):null;if(!el){return;}
+ if(el.matches('tr[data-href]')){if(!e.target.closest('a')){location.hash=el.getAttribute('data-href');}return;}
+ if(el.hasAttribute('data-dec')){var id=el.getAttribute('data-dec'),v=el.getAttribute('data-v');state.dec[id]=v||'';var d=decision(id);rerender();if(v){toast('Decided: '+decLabel(d,v)+'. '+team(d.from).name.replace(/^\[|\]$/g,'')+' notified, task updated.');}return;}
+ if(el.hasAttribute('data-toast')){toast(el.getAttribute('data-toast'));return;}
+ if(el.hasAttribute('data-view')){state.view=el.getAttribute('data-view');rerender();return;}
+ if(el.hasAttribute('data-tview')){state.tview=el.getAttribute('data-tview');rerender();return;}
+ if(el.hasAttribute('data-cal')){state.cal=el.getAttribute('data-cal');rerender();return;}
+ if(el.hasAttribute('data-post')){var sid=el.getAttribute('data-post'),i=el.getAttribute('data-i');state.post[sid]=state.post[sid]||{};state.post[sid][i]=!state.post[sid][i];rerender();return;}
+ if(el.hasAttribute('data-set')){var k=el.getAttribute('data-set');state.set[k]=!state.set[k];rerender();return;}
+ if(el.hasAttribute('data-wizgo')){var g=el.getAttribute('data-wizgo'),w=state.wiz;
+  if(g==='next'){if(w.step===1&&(!w.city||!w.date)){toast('Add at least a city and a date.');return;}w.step++;rerender();}
+  else if(g==='back'){w.step--;rerender();}
+  else{state.created++;var nid='new'+state.created;SHOWS.push({id:nid,date:w.date,city:w.city,country:w.country||'',venue:w.venue||'[Venue]',type:w.type,booking:'Provisional',lead:w.lead,status:'planning',ready:0,missing:['Contract','Deposit','Flights','Hotel','Tech rider','Content plan'],travel:'Not started',hotel:'Not started',contract:'Draft',deposit:'Not issued yet',production:'Not started',marketing:'Not started',set:null,tz:'[Time zone]'});
+   [['Get the contract signed','Booking',w.lead,7],['Issue the deposit invoice','Finance','finance',14],['Book the flights','Travel','travel',21],['Book the hotel','Travel','travel',21],['Send the tech rider','Production','production',21],['Agree the content plan','Marketing','social',14]].forEach(function(x,j){TASKS.push({id:nid+'t'+j,title:x[0],show:nid,cat:x[1],owner:x[2],due:add(TODAY,x[3]),prio:'Normal',status:'Not started'});});
+   state.wiz={step:1,city:'',country:'',venue:'',date:'',type:'Club show',lead:'booking',template:'Standard show'};toast('Show created with 6 standard tasks.');location.hash='#/ops/show/'+nid;}
+  return;}
+});
+document.addEventListener('change',function(e){var t=e.target;if(t.hasAttribute&&t.hasAttribute('data-task')){state['ts_'+t.getAttribute('data-task')]=t.value;rerender();toast('Status updated: '+t.value);}else if(t.hasAttribute&&t.hasAttribute('data-wiz')){state.wiz[t.getAttribute('data-wiz')]=t.value;}});
+document.addEventListener('input',function(e){var t=e.target;if(t.hasAttribute&&t.hasAttribute('data-wiz')){state.wiz[t.getAttribute('data-wiz')]=t.value;return;}
+ if(t.id==='q'){var q=t.value.trim().toLowerCase();var r=document.getElementById('results');if(!q){r.className='results';r.innerHTML='';return;}
+  var res=[];upcoming().forEach(function(s){if((s.city+' '+s.venue+' '+s.country).toLowerCase().indexOf(q)>-1){res.push(['#/ops/show/'+s.id,s.city,'Show, '+fmt(s.date)]);}});
+  tasks().forEach(function(x){if(x.title.toLowerCase().indexOf(q)>-1){res.push(['#/ops/show/'+x.show+'/tasks',x.title,'Task, '+show(x.show).city]);}});
+  TEAM.forEach(function(p){if((p.name+' '+p.role).toLowerCase().indexOf(q)>-1){res.push(['#/ops/team/'+p.id,p.name,'Team']);}});
+  allDocs().forEach(function(d){if((d.name+' '+show(d.show).city).toLowerCase().indexOf(q)>-1){res.push(['#/ops/doc/'+d.id,d.name+', '+show(d.show).city,'Document']);}});
+  r.innerHTML=res.length?res.slice(0,8).map(function(x){return '<a href="'+x[0]+'"><span>'+esc(x[1])+'</span><span class="tiny muted">'+esc(x[2])+'</span></a>';}).join(''):'<div class="small muted" style="padding:10px">No result for "'+esc(q)+'"</div>';r.className='results on';}
+});
+window.addEventListener('hashchange',function(){render(true);});
+if(!location.hash){history.replaceState(null,'','#/ops');}
+render(false);
+window.__m360={render:render,state:state};
+})();
+</script>
+</body>
+</html>
